@@ -1,4 +1,4 @@
 module.exports = app => {
-    require('./pokedexRoute.js')(app)
-    require('./pokedexSelRoute.js')(app)
+    require ('../routes/pokedexRoutes.js')(app)
+    // require ('./pokedexSelRoutes.js')(app)
 }
