@@ -1,4 +1,5 @@
 module.exports = {
     Pokedex: require('./Pokedex'),
-    PokedexSel: require('./PokedexSel')
+    User: require('./User'),
+    Join : require('./Join')
 }
