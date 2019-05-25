@@ -1,9 +1,8 @@
 const express = require('express')
 const app = express()
 const { join } = require('path')
-require("dotenv").config()
 const PORT = process.env.PORT || 3000
-require('dotenv').config()
+require("dotenv").config()
 
 app.use(express.static(join(__dirname, 'public')))
 app.use(express.urlencoded({ extended : true }))
