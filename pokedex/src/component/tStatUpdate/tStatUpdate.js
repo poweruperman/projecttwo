@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react'
 
-class tStatUpdate extends Compoent {
+class tStatUpdate extends Component {
     render () {
         return (
             <>
