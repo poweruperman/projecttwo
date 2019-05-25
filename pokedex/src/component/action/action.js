@@ -17,7 +17,12 @@ class action extends Component {
             <>
                 {/* All the action HTML will go in here */}
                 {/* Functions will have to be written outside of Render() */}
+
+
+
             </>
         )
     }
 }
+
+export default action

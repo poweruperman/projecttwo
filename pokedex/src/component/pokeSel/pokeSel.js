@@ -10,3 +10,5 @@ class pokeSel extends Component {
         )
     }
 }
+
+export default pokeSel

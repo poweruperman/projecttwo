@@ -13,3 +13,5 @@ class tStatUpdate extends Compoent {
         )
     }
 }
+
+export default tStatUpdate

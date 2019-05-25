@@ -12,3 +12,4 @@ class demand extends Component {
         )
     }
 }
+export default demand
