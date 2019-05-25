@@ -20,5 +20,6 @@ Pokemon.init({
         sequelize: connection,
         modelName: 'pokemon'
     })
+    
 
 module.exports = Pokemon
