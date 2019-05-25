@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS pokedex_db;
-
+CREATE DATABASE pokedex_db;
 USE pokedex_db;
 
 INSERT INTO pokemons(name,front_img,back_img,type_1,type_2,hp,attack,defense,sp_attack,sp_defense,speed,background,createdAt,updatedAt) VALUES ('Bulbasaur','http://www.pokestadium.com/sprites/xy/bulbasaur.gif','http://www.pokestadium.com/sprites/xy/bulbasaur-3.gif','Grass','Poison',45,49,49,65,65,45,'grass.gif','2019-05-24 02:07:58.723','2019-05-24 02:07:58.723');

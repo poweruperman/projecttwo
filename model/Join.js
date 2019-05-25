@@ -22,4 +22,7 @@ Join.init({
         modelName: 'join'
     })
 
+
+    
+
 module.exports = Join
