@@ -12,3 +12,5 @@ class gameOver extends Component {
         )
     }
 }
+
+export default gameOver
