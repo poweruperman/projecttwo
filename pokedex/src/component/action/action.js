@@ -4,69 +4,70 @@ const diff = require('./time.js')
 const sample = require('./route.js')
 
 // Feeding
-const feed = () => {
-    affection += 10
-    exhaust += 10
-    anger -= 10
-    sadness -= 10
-    hunger -= 10
-}
-// Sleep
-//function where user inputs the numbers of sleep hours 
-const sleepAction = () => {
-    let isAsleep = true
-    let userHours
-    const numHours = 8
-    if(isAsleep = true){
-        affection += 10
-        anger -= 10
-        sadness -= 10
-        exhaust -= 10
-    }
-    else if (numHours != userHours) { //when sleep is interrupted
-        anger += 10
-        sadness += 10
-        affection -= 10
-    }
-}
-// Train
-const trainAction = () => {
-    hunger += 10
-    exhaust += 10
-    affection -= 10
-    boredom -=10
-}
-// Park 
-const parkAction = () => {
-    affection += 10
-    hunger += 10
-    exhaust += 10
-    boredom -= 10
-    sadness -= 10
-    anger -= 10
-}
-// Pet
-const petAction = () => {
-    affection += 10
-    boredom -= 10
-    sadness -= 10
-    anger -= 10
-}
+// const feed = () => {
+//     affection += 10
+//     exhaust += 10
+//     anger -= 10
+//     sadness -= 10
+//     hunger -= 10
+// }
+// // Sleep
+// //function where user inputs the numbers of sleep hours 
+// const sleepAction = () => {
+//     let isAsleep = true
+//     let userHours
+//     const numHours = 8
+//     if(isAsleep = true){
+//         affection += 10
+//         anger -= 10
+//         sadness -= 10
+//         exhaust -= 10
+//     }
+//     else if (numHours != userHours) { //when sleep is interrupted
+//         anger += 10
+//         sadness += 10
+//         affection -= 10
+//     }
+// }
+// // Train
+// const trainAction = () => {
+//     hunger += 10
+//     exhaust += 10
+//     affection -= 10
+//     boredom -=10
+// }
+// // Park 
+// const parkAction = () => {
+//     affection += 10
+//     hunger += 10
+//     exhaust += 10
+//     boredom -= 10
+//     sadness -= 10
+//     anger -= 10
+// }
+// // Pet
+// const petAction = () => {
+//     affection += 10
+//     boredom -= 10
+//     sadness -= 10
+//     anger -= 10
+// }
 // Play 
 // Clean
 // Ignore
 
-const ignoreAction = () => {
+// const ignoreAction = () => {
+//     sadness += 10
+    
+// }
 
-}
 
-
-const timeDiff = (timeHere) => {
-    //possibilty for error here
-    let updatedAt = moment(timeHere, 'ddd, DD MMM YYYY kk:mm:ss').unix()
-    let diff = Math.floor((moment().unix() - updatedAt) / 60)
-    return diff
-}
+// const timeDiff = (timeHere) => {
+//     //possibilty for error here
+//     let updatedAt = moment(timeHere, 'ddd, DD MMM YYYY kk:mm:ss').unix()
+//     let diff = Math.floor((moment().unix() - updatedAt) / 60)
+//     return diff
+// }
 
 // // whether they are going to die or not
 // // Make sure they oo not go over 100 or below 0
