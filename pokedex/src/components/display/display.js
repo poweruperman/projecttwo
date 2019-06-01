@@ -6,7 +6,7 @@ import './display.css'
 import React, { Component } from 'react'
 import Action from './components/action'
 import TStatUpdate from './components/tStatUpdate'
-import Demand from './components/demand'
+// import Demand from './components/demand'
 import Sprite from './components/sprite'
 
 

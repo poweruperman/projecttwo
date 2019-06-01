@@ -29,7 +29,7 @@ class TStatUpdate extends Component {
         stuff : ''
     }
     getData() {
-        fetch('/api/pokedex', {})
+        fetch('/pokedex')
             .then(r => r.text())
             .then(r => {
                 this.setState({stuff : r})

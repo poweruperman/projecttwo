@@ -78,6 +78,7 @@ class App extends Component {
           <Route exact path='/display' component={() => <Display user_id={user_id}/>} />
           </div>
         </Router>
+        <PokeSel></PokeSel>
       </>
     )
   }

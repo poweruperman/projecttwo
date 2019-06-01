@@ -5,6 +5,7 @@
   "dependencies": {
     "express": "^4.17.0",
     "mysql2": "^1.6.5",
+    "node-fetch": "^2.6.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",
@@ -30,5 +31,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
