@@ -1,12 +1,18 @@
-import React, { Component } from 'react'
-import './App.css'
-import firebase from 'firebase'
-//components doesnt exist what folder do i hit
-import Login from './component/login'
-import { Button } from 'reactstrap'
-import { Router, Route } from 'react-router'
-import { createdBrowserHistory } from 'history'
+// TO DO
+// Need to finalize the authentication
+// Authentication page will have to output following information
+// user_id
+// pokemon_type
 
+
+import './App.css'
+
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import firebase from 'firebase'
+import Login from './components/login'
+import Display from './components/display'
+import PokeSel from './components/pokeSel'
 
 /**********************************************
  *  *** FIREBASE LOGIN FOR GLOBAL SCOPE ***   *
@@ -66,22 +72,37 @@ class App extends Component {
 }
 
 class App extends Component {
+  state = {
+    isSignedIn: false,
+    isPokeSel : false,
+    user_id : 'test'
+  }
+  //CHECK FOR STATE CHANGES IN LOGIN
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged(
+      (user) => this.setState({ isSignedIn: !!user })
+    )
+  }
+  // Listen to the Firebase Auth state and set the local state.
+  componentDidMount() {
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+      (user) => this.setState({ isSignedIn: !!user })
+    );
+  }
+  // Make sure we un-register Firebase observers when the component unmounts.
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
+  }
   render() {
-    const { isSignedIn } = this.state
+    const { login } = this.state
+    const { isSignedIn, isPokeSel, user_id } = this.state
     return (
       <>
         <Router>
           <div>
-            <Route exact path='/' component={() => isSignedIn ? <Display></Display>
-        : <pokeSel></pokeSel>
-              //login config otherwise.
-              // (<login uiConfig={uiConfig} />)
-            } />
-
-            {/* dont think i need this route under this note */}
-
-            {/* <Route exact path='/login' component={() => <Login uiConfig={uiConfig} />} /> */}
-
+          <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id}/>) : (<Login uiConfig={uiConfig} />)} />
+          <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id}/>) : (<PokeSel />) } />
+          <Route exact path='/display' component={() => <Display user_id={user_id}/>} />
           </div>
         </Router>
       </>
