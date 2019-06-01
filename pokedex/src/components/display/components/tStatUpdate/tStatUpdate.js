@@ -24,7 +24,7 @@ const tmpObj = () => {
         updatedAt: 'Tue, 01 May 2012 19:12:16 GMT'
     }
 }
-class tStatUpdate extends Component {
+class TStatUpdate extends Component {
 
     state = { 
         stuff : 0
@@ -72,4 +72,4 @@ class tStatUpdate extends Component {
     }
 }
 
-export default tStatUpdate
+export default TStatUpdate

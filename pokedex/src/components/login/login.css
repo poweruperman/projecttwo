@@ -1,0 +1,36 @@
+#login {
+    margin-right: 55%;
+    margin-top: -33%;
+}
+
+#intro {
+    margin-left: 5%;
+    margin-top: -30%;
+    text-shadow: -1px 0 yellow;
+    font-family: 'PokemonFont';
+    font-size: 260%;
+
+}
+
+#instrc {
+    text-align: left;
+    text-shadow: -1px 0 yellow;
+    font-family: 'PokemonFont';
+    font-size: 100%;
+    margin-left: 25px;
+}
+
+#pokeball {
+    margin-right: -40%;
+}
+
+.blinking{
+    animation:blinkingText 0.8s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #000;    }
+    49%{    color: transparent; }
+    50%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
+}

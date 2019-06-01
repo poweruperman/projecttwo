@@ -66,7 +66,7 @@ import React, { Component } from 'react'
 //     affection -= 10
 // }
 
-class action extends Component {
+class Action extends Component {
     render () {
         return (
             <>
@@ -80,4 +80,4 @@ class action extends Component {
     }
 }
 
-export default action
+export default Action
