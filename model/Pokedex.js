@@ -4,7 +4,7 @@ const connection = require('../config')
 class Pokemon extends Sequelize.Model { }
 
 Pokemon.init({
-    name: Sequelize.STRING,
+    name: { type: Sequelize.STRING, field: 'name' },
     front_img: Sequelize.STRING,
     back_img: Sequelize.STRING,
     type_1: Sequelize.STRING,

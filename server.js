@@ -10,6 +10,13 @@ app.use(express.json())
 
 require('./routes')(app)
 
-require('./config').sync()
-    .then(_ => app.listen(PORT, () => console.log(`PORT number is : ${PORT}`)))
-    .catch(e => console.log(e))
+// require('./config').sync()
+//     .then(_ => app.listen(PORT, () => console.log(`PORT number is : ${PORT}`)))
+//     .catch(e => console.log(e))
+
+const sequelize = require('./config')
+sequelize.authenticate().then(() => {
+  return sequelize.sync()
+}).then(() => {
+  app.listen(PORT, () => console.log(`PORT number is : ${PORT}`))
+}).catch(e => console.log(e))
