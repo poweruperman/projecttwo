@@ -4,7 +4,7 @@ const { join } = require('path')
 const PORT = process.env.PORT || 3001
 require("dotenv").config()
 
-app.use(express.static(join(__dirname, 'pokedex/public')))
+app.use(express.static(join(__dirname, 'pokedex', 'build')))
 app.use(express.urlencoded({ extended : true }))
 app.use(express.json())
 
