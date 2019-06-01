@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react'
 
-class gameOver extends Component {
+class GameOver extends Component {
     render () {
         return (
             <>
@@ -13,4 +13,4 @@ class gameOver extends Component {
     }
 }
 
-export default gameOver
+export default GameOver

@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react'
 
-class demand extends Component {
+class Demand extends Component {
     render () {
         return (
             <>
@@ -13,4 +13,4 @@ class demand extends Component {
         )
     }
 }
-export default demand
+export default Demand

@@ -1,10 +1,14 @@
-import React, { Component } from 'react'
 import './App.css'
+
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
 import firebase from 'firebase'
-//components doesnt exist what folder do i hit
-import Login from './component/login/login'
 import { Button } from 'reactstrap'
 
+import Login from './components/login'
+import Display from './components/display'
+import PokeSel from './components/pokeSel'
 
 /**********************************************
  *  *** FIREBASE LOGIN FOR GLOBAL SCOPE ***   *
@@ -36,17 +40,50 @@ const uiConfig = {
 /**********************************************/
 
 class App extends Component {
+  state = {
+    isSignedIn: false
+  }
+  //CHECK FOR STATE CHANGES IN LOGIN
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged(
+      (user) => this.setState({ isSignedIn: !!user })
+    )
+  }
+  // Listen to the Firebase Auth state and set the local state.
+  componentDidMount() {
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+      (user) => this.setState({ isSignedIn: !!user })
+    );
+  }
+  // Make sure we un-register Firebase observers when the component unmounts.
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
+  }
   render() {
     const { login } = this.state
+    const { isSignedIn } = this.state
     return (
       <>
-      <Router>
-      <div>
-     
-      <Route exact path='/login' component={() => <login uiConfig={uiConfig} />} />
+        <Router>
+          <div>
 
-      </div>
-      </Router>
+            <Route exact path='/login' component={() => <Login uiConfig={uiConfig} />} />
+            <Router>
+              <div>
+                <Route exact path='/' component={() => isSignedIn ? <Display></Display>
+                  : <PokeSel></PokeSel>
+                  //login config otherwise.
+                  // (<login uiConfig={uiConfig} />)
+                } />
+
+                {/* dont think i need this route under this note */}
+
+                {/* <Route exact path='/login' component={() => <Login uiConfig={uiConfig} />} /> */}
+
+              </div>
+            </Router>
+          </div>
+        </Router>
       </>
     )
   }
