@@ -1,4 +1,5 @@
-const { User } = require('../model')
+const { User, Join, Pokedex } = require('../model')
+
 
 
 module.exports = app => {
@@ -9,7 +10,11 @@ module.exports = app => {
     })
 
     app.get('/user/:id', (req, res) => {
-        User.findOne({ where: {id: req.params.id}})
+        User.findOne({ where: {id: req.params.id},
+            include: [{
+                model: Join, include: [{model: Pokedex}]
+            }]
+        })
         .then(user => res.json(user))
         .catch(e => console.log(e))
     })
