@@ -50,6 +50,7 @@ class App extends Component {
    isPokeSel: false,
    user_id: 'test',
    isReady : false
+   
  }
  //CHECK FOR STATE CHANGES IN LOGIN
  componentWillMount() {
