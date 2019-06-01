@@ -1,11 +1,16 @@
+// TO DO
+// Need to finalize the authentication
+// Authentication page will have to output following information
+// user_id
+// pokemon_type
+
+
 import './App.css'
 
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-
 import firebase from 'firebase'
 import { Button } from 'reactstrap'
-
 import Login from './components/login'
 import Display from './components/display'
 import PokeSel from './components/pokeSel'
@@ -41,7 +46,9 @@ const uiConfig = {
 
 class App extends Component {
   state = {
-    isSignedIn: false
+    isSignedIn: false,
+    isPokeSel : false,
+    user_id : 'test'
   }
   //CHECK FOR STATE CHANGES IN LOGIN
   componentWillMount() {
@@ -61,27 +68,14 @@ class App extends Component {
   }
   render() {
     const { login } = this.state
-    const { isSignedIn } = this.state
+    const { isSignedIn, isPokeSel, user_id } = this.state
     return (
       <>
         <Router>
           <div>
-
-            <Route exact path='/login' component={() => <Login uiConfig={uiConfig} />} />
-            <Router>
-              <div>
-                <Route exact path='/' component={() => isSignedIn ? <Display></Display>
-                  : <PokeSel></PokeSel>
-                  //login config otherwise.
-                  // (<login uiConfig={uiConfig} />)
-                } />
-
-                {/* dont think i need this route under this note */}
-
-                {/* <Route exact path='/login' component={() => <Login uiConfig={uiConfig} />} /> */}
-
-              </div>
-            </Router>
+          <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id}/>) : (<Login uiConfig={uiConfig} />)} />
+          <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id}/>) : (<PokeSel />) } />
+          <Route exact path='/display' component={() => <Display user_id={user_id}/>} />
           </div>
         </Router>
       </>

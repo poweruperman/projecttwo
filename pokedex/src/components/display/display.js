@@ -1,25 +1,35 @@
+// TO DO
+// Need to find a way to provide a background image depending on what the pokemon type is
+
+import './display.css'
+
 import React, { Component } from 'react'
+import Action from './components/action'
+import TStatUpdate from './components/tStatUpdate'
+import Demand from './components/demand'
+import Sprite from './components/sprite'
+
 
 class Display extends Component {
+    state = {
+        user_id : this.props.user_id
+    }
 
     render() {
+        const { user_id } = this.state
         return (
             <>
-            {/* <div className='display'>
-                <div className='actions'>
-                    <h6>div for actions</h6>
-                    <button id='feed' className='feed' onClick={this.handleClick}>Feed</button>
-                     <button id='sleep' className='sleep' onClick={this.handleClick}>Sleep</button>
-                     <button id='train' className='train' onClick={this.handleClick}>Train</button>
-                     <button id='park' className='park' onClick={this.handleClick}>Park</button>
-                     <button id='pet' className='pet' onClick={this.handleClick}>Pet</button>
+            <div className='displayContainer'>
+                <div className='pokemonSprite'>
+                    <Sprite user_id={user_id}/>
                 </div>
-                <div className='tstats'>
-                    <h6>div for tstats</h6>
+                <div className='TStatUpdate'>
+                    <TStatUpdate user_id={user_id}/>
                 </div>
-
-            </div> */}
-          
+                <div className='Action'>
+                    <Action user_id={user_id}/>
+                </div>
+            </div>          
             </>
         )
     }
