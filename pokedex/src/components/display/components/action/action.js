@@ -1,4 +1,3 @@
-// Write a react page and functions to run actions
 import React, { Component } from 'react'
 
 // const diff = require('./time.js')
