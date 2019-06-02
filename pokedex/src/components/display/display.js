@@ -19,6 +19,7 @@ class Display extends Component {
         const { user_id } = this.state
         return (
             <>
+            <h1>${user_id}</h1>
             <div className='displayContainer'>
                 <div className='pokemonSprite'>
                     <Sprite user_id={user_id}/>

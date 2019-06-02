@@ -8,9 +8,9 @@
 import './App.css'
 
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import firebase from 'firebase'
-import { Button } from 'reactstrap'
+// import { Button } from 'reactstrap'
 import Login from './components/login'
 import Display from './components/display'
 import PokeSel from './components/pokeSel'
@@ -36,7 +36,7 @@ const uiConfig = {
   // Popup signin flow rather than redirect flow.
   signInFlow: 'popup',
   // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-  signInSuccessUrl: '/signedIn',
+  signInSuccessUrl: '/pokeSel',
   // We will display Google and Facebook as auth providers.
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -47,19 +47,23 @@ const uiConfig = {
 class App extends Component {
   state = {
     isSignedIn: false,
-    isPokeSel : false,
-    user_id : 'test'
+    isPokeSel: false,
+    user_id: 'test',
+    isReady : false
   }
   //CHECK FOR STATE CHANGES IN LOGIN
   componentWillMount() {
     firebase.auth().onAuthStateChanged(
-      (user) => this.setState({ isSignedIn: !!user })
+      (user) => this.setState({ isSignedIn: !!user, user_id: user.uid, isReady : true })
     )
   }
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-      (user) => this.setState({ isSignedIn: !!user })
+      (user) => {
+        this.setState({ isSignedIn: !!user, user_id: user.uid })
+        console.log(this.state.user_id)
+      }
     );
   }
   // Make sure we un-register Firebase observers when the component unmounts.
@@ -68,14 +72,14 @@ class App extends Component {
   }
   render() {
     const { login } = this.state
-    const { isSignedIn, isPokeSel, user_id } = this.state
+    const { isSignedIn, isPokeSel, user_id, isReady } = this.state
     return (
       <>
         <Router>
           <div>
-          <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id}/>) : (<Login uiConfig={uiConfig} />)} />
-          <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id}/>) : (<PokeSel />) } />
-          <Route exact path='/display' component={() => <Display user_id={user_id}/>} />
+            <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id} />) : (<Login uiConfig={uiConfig} />)} />
+            <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id} />) : (<PokeSel />)} />
+            <Route exact path='/display' component={() => isReady ? <Display user_id={user_id} /> : (<Login uiConfig={uiConfig} />)} />
           </div>
         </Router>
       </>
