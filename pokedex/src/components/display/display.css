@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+.displayContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 4fr 1fr;
+}
+
+.pokemonSprite {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+    align-content: center;
+}
+
+.TStatUpdate {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 1;
+}
+.Action {
+    grid-column: 1 / span 2;
+    grid-row: 3 / span 1;
+}
