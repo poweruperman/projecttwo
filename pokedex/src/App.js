@@ -76,6 +76,7 @@ class App extends Component {
           <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id}/>) : (<Login uiConfig={uiConfig} />)} />
           <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id}/>) : (<PokeSel />) } />
           <Route exact path='/display' component={() => <Display user_id={user_id}/>} />
+          <Route exact path='/pokesel' component={() => <PokeSel />} />
           </div>
         </Router>
         <PokeSel></PokeSel>
