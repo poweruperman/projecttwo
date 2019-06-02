@@ -2,8 +2,19 @@ const { User } = require('../model')
 
 
 module.exports = app => {
-    app.get('/user', (req, res) => {
-        User.findAll()
+    // app.get('/user', (req, res) => {
+    //     User.findAll()
+    //     .then(user => res.json(user))
+    //     .catch(e => console.log(e))
+    // })
+
+    app.get('/user/:id', (req, res) => {
+        User.findOne({ where: {id: req.params.id}})
+        User.findOne({ where: {id: req.params.id},
+            include: [{
+                model: Join, include: [{model: Pokedex}]
+            }]
+        })
         .then(user => res.json(user))
         .catch(e => console.log(e))
     })
