@@ -9,7 +9,7 @@ module.exports = app => {
     })
 
     app.get('/join/:id', (req, res) => {
-        Join.findOne({ where: {id: req.params.id}})
+        Join.findOne({ where: {user_id: req.params.id}})
         .then(join => res.json(join))
         .catch(e => console.log(e))
     })
@@ -21,7 +21,7 @@ module.exports = app => {
     })
 
     app.put('/join/:id', (req, res) => {
-        Join.update(req.body, { where: { id: req.params.id }})
+        Join.update(req.body, { where: { user_id: req.params.id }})
         .then(_=> res.sendStatus(200))
         .catch(e => console.log(e))
     })

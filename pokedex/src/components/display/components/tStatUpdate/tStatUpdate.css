@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
+.tStatContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.affection {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+}
+.anger {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 1;
+}
+.boredom {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 1;
+}
+.exhaust {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+}
+.hunger {
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+}
+.sadness {
+    grid-column: 3 / span 1;
+    grid-row: 2 / span 1;
+}
