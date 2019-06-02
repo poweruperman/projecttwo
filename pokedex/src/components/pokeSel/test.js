@@ -1,5 +1,4 @@
 let moment = require("moment");
-const fetch = require("node-fetch");
 
 let status = {
     hunger : 0,
@@ -16,7 +15,7 @@ let status = {
     sadnessT: moment().format(),
 }
 
-const test_1 = () => {
+const getPokedex = () => {
     let id = Math.floor(Math.random()*151)
     fetch(`/pokemon/:${id}`)
         .then(r => r.json())
@@ -35,8 +34,8 @@ const test_1 = () => {
             status.sp_defense = r.sp_defense
             status.speed = r.speed
             status.background = r.background
-            status.
-            status.
+            status.isBaby = r.isBaby
+            status.canEvolve = r.canEvolve
 
             console.log(status)
 
@@ -69,5 +68,5 @@ const test_1 = () => {
 //         .catch(e => console.log(e))
 // }
 
-test_1()
+getPokedex()
 // test_2()
