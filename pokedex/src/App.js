@@ -14,6 +14,7 @@ import firebase from 'firebase'
 import Login from './components/login'
 import Display from './components/display'
 import PokeSel from './components/pokeSel'
+// import express from 'express'
 
 /**********************************************
 *  *** FIREBASE LOGIN FOR GLOBAL SCOPE ***   *
@@ -52,21 +53,61 @@ class App extends Component {
    isReady : false
    
  }
- //CHECK FOR STATE CHANGES IN LOGIN
- componentWillMount() {
-   firebase.auth().onAuthStateChanged(
-     (user) => this.setState({ isSignedIn: !!user, user_id: user.uid, isReady : true })
-   )
- }
+
+
+
+//  firebase.auth().then((firebase)=> {
+//    fetch('http://localhost:3001/users/checkSession', params: { uid: firebase.uid, email: firebase.identifier }).then(() => { setState... })
+//  })
+
+//  CHECK FOR STATE CHANGES IN LOGIN
+//  componentWillMount() {
+//    firebase.auth().onAuthStateChanged(
+//      (user) => this.setState({ isSignedIn: !!user, user_id: user.uid, isReady : true }).fetch('http://localhost:3001/users/checkSession')
+//     .then(res => res.json())
+//     .then(
+//       (result) => {
+//         this.setState({
+//           isLoaded: true,
+//           items: result.items
+//         });
+//       },
+//    )
+
+//  }
+
+//try :
+
+// componentWillMount() {
+//   firebase.auth().onAuthStateChanged((user) => {
+//  if (user) {
+//    (firebase.auth().currentUser !== null) 
+//        console.log("user id: " + firebase.auth().currentUser.uid);
+//    // User logged in already or has just logged in.
+//  } else {
+//    // User not logged in or has just logged out.
+//  }
+// });
  // Listen to the Firebase Auth state and set the local state.
- componentDidMount() {
-   this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-     (user) => {
-       this.setState({ isSignedIn: !!user, user_id: user.uid })
-       console.log(this.state.user_id)
-     }
-   );
- }
+//  componentDidMount() {
+//    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+//      (user) => {
+//        this.setState({ isSignedIn: !!user, user_id: user.uid })
+//        console.log(this.state.user_id)
+//      }
+//    );
+//  }
+componentWillMount() {
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // User logged in already or has just logged in.
+    
+    console.log(user.uid);
+  } else {
+    // User not logged in or has just logged out.
+  }
+});
+}
  // Make sure we un-register Firebase observers when the component unmounts.
  componentWillUnmount() {
    this.unregisterAuthObserver();
