@@ -6,6 +6,8 @@ import Action from './components/action'
 import TStatUpdate from './components/tStatUpdate'
 import Demand from './components/demand'
 import Sprite from './components/sprite'
+import Background from './components/background'
+import Loading from './components/loading'
 
 
 
@@ -26,11 +28,14 @@ class Display extends Component {
         hungerT : '',
         sadness : '',
         sadnessT : '',
-        background : '',
-        pokeState : false
+        background : 'default.jpg',
+        pokeState : false,
+        isBackgroundReady : false,
+        isReady : false
     }
     testFunc = () => {
         console.log(this.state)
+        console.log(this.state.background)
     }
     testFunc2 = () => {
         this.setState(prevState => ({
@@ -42,21 +47,23 @@ class Display extends Component {
             .then(r => r.json())
             .then(r => {
                 console.log(r)
-                this.setState({ front_img : r.front_img })
-                this.setState({ back_img : r.back_img })
-                this.setState({ affection : r.affection })
-                this.setState({ affectionT : r.affectionT })
-                this.setState({ anger : r.anger })
-                this.setState({ angerT : r.angerT })
-                this.setState({ boredom : r.boredom })
-                this.setState({ boredomT : r.boredomT })
-                this.setState({ exhaust : r.exhaust })
-                this.setState({ exhaustT : r.exhaustT })
-                this.setState({ hunger : r.hunger })
-                this.setState({ hungerT : r.hungerT })
-                this.setState({ sadness : r.sadness })
-                this.setState({ sadnessT : r.sadnessT })
-                this.setState({ background : r.background })
+                this.setState({ 
+                    front_img : r.front_img,
+                    back_img : r.back_img,
+                    affection : r.affection,
+                    affectionT : r.affectionT,
+                    anger : r.anger,
+                    angerT : r.angerT,
+                    boredom : r.boredom,
+                    boredomT : r.boredomT,
+                    exhaust : r.exhaust,
+                    exhaustT : r.exhaustT,
+                    hunger : r.hunger,
+                    hungerT : r.hungerT,
+                    sadness : r.sadness,
+                    sadnessT : r.sadnessT,
+                    background : r.background,
+                })
             })
             .catch(e => console.log(e))
     }
@@ -75,28 +82,39 @@ class Display extends Component {
             })
             .catch(e => console.log(e))
     }
-
+    componentDidMount = () => {
+        this.getJoinData(this.state.user_id)
+        setTimeout(() => {
+            this.setState({ 
+                isBackgroundReady : true,
+                isReady : true
+            })
+        }, 5000)
+    }
     render() {
-        const { user_id, front_img, back_img, background, pokeState, affection, anger, boredom, exhaust, hunger, sadness } = this.state
+        const { user_id, front_img, back_img, background, isBackgroundReady, pokeState, affection, anger, boredom, exhaust, hunger, sadness, isReady } = this.state
         return (
             <>
-                <button onClick={() => this.getJoinData(user_id)}>Get Join Data</button>
+                {/* <button onClick={() => this.countDown()}>Get Join Data</button> */}
                 <br />
-                <button onClick={() => this.testFunc()}>test btn : log the state</button>
+                {/* <button onClick={() => this.testFunc()}>test btn : log the state</button>
                 <br />
                 <button onClick={() => this.testFunc2()}>test btn : change pokemon state</button>
-                <br />
+                <br /> */}
                 <div className='displayContainer'>
+                    <div className='backgroundImg'>
+                        <Background id='backgroundImg' background={background} isBackgroundReady={isBackgroundReady} />
+                    </div>
                     <div className='pokemonSprite'>
-                        <Sprite user_id={user_id} front_img={front_img} back_img={back_img} pokeState={pokeState} />
+                        <Sprite user_id={user_id} front_img={front_img} back_img={back_img} pokeState={pokeState} isReady={isReady} />
                     </div>
                     <div className='TStatUpdate'>
-                        <TStatUpdate user_id={user_id} hunger={hunger} affection={affection} anger={anger} boredom={boredom} exhaust={exhaust} sadness={sadness}/>
+                        <TStatUpdate user_id={user_id} hunger={hunger} affection={affection} anger={anger} boredom={boredom} exhaust={exhaust} sadness={sadness} isReady ={isReady} />
                     </div>
                     <div className='Action'>
                         <Action user_id={user_id} />
                     </div>
-                </div>
+                </div> 
             </>
         )
     }
