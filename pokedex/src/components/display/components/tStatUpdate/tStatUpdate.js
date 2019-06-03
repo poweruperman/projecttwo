@@ -29,7 +29,9 @@ class TStatUpdate extends Component {
                         <div className='hunger'>Hunger : {hunger}</div>
                         <div className='sadness'>Sadness : {sadness}</div>
                     </div>
-                : ''}
+                    
+                    : ''
+                }
             </>
         )
     }
