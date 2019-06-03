@@ -81,7 +81,6 @@ class Display extends Component {
             })
             .catch(e => console.log(e))
     }
-
     intervalObj = () => {
         let tmp = {
             affection : this.state.hunger - 10,
@@ -98,6 +97,10 @@ class Display extends Component {
             sadnessT : moment().format('YYYY-MM-DD kk:mm:ss')
         }
         return tmp
+    }
+    actionStatus = (dataFromChild) => {
+        //use data from Child here
+        console.log(dataFromChild)
     }
 
     componentDidMount = () => {
@@ -134,7 +137,7 @@ class Display extends Component {
                         <TStatUpdate user_id={user_id} hunger={hunger} affection={affection} anger={anger} boredom={boredom} exhaust={exhaust} sadness={sadness} isReady ={isReady} />
                     </div>
                     <div className='Action'>
-                        <Action user_id={user_id} isReady={isReady} />
+                        <Action user_id={user_id} isReady={isReady} actionStatus={this.actionStatus} />
                     </div>
                 </div> 
             </>
