@@ -57,28 +57,28 @@ class App extends Component {
 
  
 
- userObj = () => {
-   let tmp = {
-     user_id : this.state.user_id,
-     identifier :  this.state.identifier
-   }
-   return tmp
- }
+//  userObj = () => {
+//    let tmp = {
+//      user_id : this.state.user_id,
+//      identifier :  this.state.identifier
+//    }
+//    return tmp
+//  }
 
- postUserTable = (response) => {
-   fetch('/user', {
-     method : 'POST',
-     headers : {
-       'Content-Type' : 'application/json'
-     },
-     body : JSON.stringify(response)
-   })
-    .then(_ => {
-      // We may have to do something here
+//  postUserTable = (response) => {
+//    fetch('/user', {
+//      method : 'POST',
+//      headers : {
+//        'Content-Type' : 'application/json'
+//      },
+//      body : JSON.stringify(response)
+//    })
+//     .then(_ => {
+//       // We may have to do something here
      
-    })
-    .catch(e => console.log(e))
- }
+//     })
+//     .catch(e => console.log(e))
+//  }
 
 
 //  //CHECK FOR STATE CHANGES IN LOGIN
@@ -92,26 +92,34 @@ class App extends Component {
 
 //axios :
 
-async createUser(uid) {
+async createUser(uid, email) {
   // const response = await axios.post("/user", uid);
-  const response = await axios.post("/user", { user_id: uid });
+  const response = await axios.post("/user", { user_id: uid, identifier: email });
+  console.log('hi',response)
   return response;
 }
 
+
+
 componentDidMount() {
-  this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(_ => {
-    // this.setState({ isSignedIn: !!user, user_id: user.uid });
-    // console.log(this.state.user_id);
+  this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+    // this.setState({ isSignedIn: !! user, user_id: user.uid });
+    // console.log('user',user);
 
     // axios call to API and create user in sql database, then logs the response
     // console.log(createUser({ user_id: user.uid }));
-    this.createUser().then((user) => this.setState({ isSignedIn: !! user, user_id: user.uid, isReady : true })
-       )
+    this.createUser(user.uid, user.email).then(response => {
+      
+    })
+    // .then((user) => 
+    
+    // this.setState({ isSignedIn: !! user, user_id: user.uid, identifier: user.email, isReady : true })
+      //  )
      })
-    }
+}
   
 
-    //chad original code:
+    //the original code:
 
   //   async createUser(uid) {
   //     const response = await axios.post("/user", uid);
@@ -153,8 +161,8 @@ componentDidMount() {
      
        <Router>
          <div>
-           <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id} />) : (<Login uiConfig={uiConfig} />)} />
-           {/* <Route exact path='/' component={() => isSignedIn ? (<Login uiConfig={uiConfig}  />) : (<Login uiConfig={uiConfig} />)} /> */}
+           {/* <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id} />) : (<Login uiConfig={uiConfig} />)} /> */}
+           <Route exact path='/' component={() => isSignedIn ? (<Login uiConfig={uiConfig}  />) : (<Login uiConfig={uiConfig} />)} />
            <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id} />) : (<PokeSel />)} />
            <Route exact path='/display' component={() => isReady ? <Display user_id={user_id} /> : (<Login uiConfig={uiConfig} />)} />
          </div>
