@@ -10,7 +10,7 @@ import './App.css'
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import firebase from 'firebase'
-// import { Button } from 'reactstrap'
+import { Button } from 'reactstrap'
 import Login from './components/login'
 import Display from './components/display'
 import PokeSel from './components/pokeSel'
@@ -54,6 +54,8 @@ class App extends Component {
    identifier : 'test Identifier'
    
  }
+
+ 
 
  userObj = () => {
    let tmp = {
@@ -113,19 +115,21 @@ componentDidMount() {
 
   //   async createUser(uid) {
   //     const response = await axios.post("/user", uid);
+      
   //     return response;
   //   }
   
   // componentDidMount() {
   //     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+      
   //       this.setState({ isSignedIn: !!user, user_id: user.uid });
-  //       console.log(this.state.user_id);
+  //       // console.log(this.state.user_id);
   //       // axios call to API and create user in sql database, then logs the response
-  //       console.log(createUser({ user_id: user.uid }));
+  //       // console.log(createUser({ user_id: user.uid }));
   //     });
-  //   }
+    // }
 
-
+  
 
 //  // Listen to the Firebase Auth state and set the local state.
 //  componentDidMount() {
@@ -143,17 +147,26 @@ componentDidMount() {
  render() {
    const { login } = this.state
    const { isSignedIn, isPokeSel, user_id, isReady } = this.state
+   
    return (
      <>
+     
        <Router>
          <div>
-           {/* <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id} />) : (<Login uiConfig={uiConfig} />)} /> */}
-           <Route exact path='/' component={() => isSignedIn ? (<Login uiConfig={uiConfig} />) : (<Login uiConfig={uiConfig} />)} />
+           <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id} />) : (<Login uiConfig={uiConfig} />)} />
+           {/* <Route exact path='/' component={() => isSignedIn ? (<Login uiConfig={uiConfig}  />) : (<Login uiConfig={uiConfig} />)} /> */}
            <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id} />) : (<PokeSel />)} />
            <Route exact path='/display' component={() => isReady ? <Display user_id={user_id} /> : (<Login uiConfig={uiConfig} />)} />
          </div>
        </Router>
+
+       
+{/*        
+       <button onClick={() => this.postUserTable(user_id)}>post uid</button> */}
+      
      </>
+
+
    )
  }
 }
