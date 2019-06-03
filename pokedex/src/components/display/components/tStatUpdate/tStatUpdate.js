@@ -7,11 +7,11 @@ import React, { Component } from 'react'
 import moment from 'moment'
 
 class TStatUpdate extends Component {
-    state = { 
-        stuff : ''
+    state = {
+        stuff: ''
     }
-    render () {
-        const { affection, anger, boredom, exhaust, hunger, sadness } = this.props
+    render() {
+        const { affection, anger, boredom, exhaust, hunger, sadness, isReady } = this.props
         // const timeDiff = (timeHere) => {
         //     let updatedAt =  moment(timeHere, 'ddd, DD MMM YYYY kk:mm:ss').unix()
         //     let diff = Math.floor((moment().unix() - updatedAt) / 60)
@@ -20,14 +20,18 @@ class TStatUpdate extends Component {
 
         return (
             <>
-                <div className='tStatContainer'>
-                    <div className='affection'>Affection : {affection}</div>
-                    <div className='anger'>Anger : {anger}</div>
-                    <div className='boredom'>Boredom : {boredom}</div>
-                    <div className='exhaust'>Exhaust : {exhaust}</div>
-                    <div className='hunger'>Hunger : {hunger}</div>
-                    <div className='sadness'>Sadness : {sadness}</div>
-                </div>
+                {isReady ?
+                    <div className='tStatContainer'>
+                        <div className='affection'>Affection : {affection}</div>
+                        <div className='anger'>Anger : {anger}</div>
+                        <div className='boredom'>Boredom : {boredom}</div>
+                        <div className='exhaust'>Exhaust : {exhaust}</div>
+                        <div className='hunger'>Hunger : {hunger}</div>
+                        <div className='sadness'>Sadness : {sadness}</div>
+                    </div>
+                    
+                    : ''
+                }
             </>
         )
     }
