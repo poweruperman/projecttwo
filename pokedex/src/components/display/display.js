@@ -2,6 +2,7 @@
 // Need to find a way to provide a background image depending on what the pokemon type is
 import './display.css'
 import React, { Component } from 'react'
+import moment from 'moment'
 import Action from './components/action'
 import TStatUpdate from './components/tStatUpdate'
 import Demand from './components/demand'
@@ -34,13 +35,14 @@ class Display extends Component {
         isReady : false
     }
     testFunc = () => {
-        console.log(this.state)
-        console.log(this.state.background)
+        console.log(moment().format('YYYY-MM-DD kk:mm:ss'))
+        console.log(this.sampleObj())
     }
     testFunc2 = () => {
         this.setState(prevState => ({
             pokeState : !prevState.pokeState
         }))
+        console.log(`This is PokeState : ${this.state.pokeState}`)
     }
     getJoinData = (userID) => {
         fetch(`/join/${userID}`)
@@ -67,21 +69,39 @@ class Display extends Component {
             })
             .catch(e => console.log(e))
     }
-    putJoinData = (userID) => {
+    putJoinData = (userID, response) => {
         fetch(`/join/${userID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-
-            })
+            body: JSON.stringify(response)
         })
             .then(_ => {
-
+                // This is where you initiate TStatInformation Update
+                this.getJoinData(this.state.user_id)
             })
             .catch(e => console.log(e))
     }
+
+    intervalObj = () => {
+        let tmp = {
+            affection : this.state.hunger - 10,
+            affectionT : moment().format('YYYY-MM-DD kk:mm:ss'),
+            anger : this.state.anger + 10,
+            angerT : moment().format('YYYY-MM-DD kk:mm:ss'),
+            boredom : this.state.boredom + 10,
+            boredomT : moment().format('YYYY-MM-DD kk:mm:ss'),
+            exhaust : this.state.exhaust + 10,
+            exhaustT : moment().format('YYYY-MM-DD kk:mm:ss'),
+            hunger : this.state.hunger + 10,
+            hungerT : moment().format('YYYY-MM-DD kk:mm:ss'),
+            sadness : this.state.sadness + 10,
+            sadnessT : moment().format('YYYY-MM-DD kk:mm:ss')
+        }
+        return tmp
+    }
+
     componentDidMount = () => {
         this.getJoinData(this.state.user_id)
         setTimeout(() => {
@@ -90,6 +110,10 @@ class Display extends Component {
                 isReady : true
             })
         }, 5000)
+        setInterval(() => {
+            let tmp = this.intervalObj()
+            this.putJoinData(this.state.user_id, tmp)
+        }, 1800000)
     }
     render() {
         const { user_id, front_img, back_img, background, isBackgroundReady, pokeState, affection, anger, boredom, exhaust, hunger, sadness, isReady } = this.state
@@ -97,10 +121,10 @@ class Display extends Component {
             <>
                 {/* <button onClick={() => this.countDown()}>Get Join Data</button> */}
                 <br />
-                {/* <button onClick={() => this.testFunc()}>test btn : log the state</button>
+                <button onClick={() => this.testFunc()}>test btn : log the state</button>
                 <br />
                 <button onClick={() => this.testFunc2()}>test btn : change pokemon state</button>
-                <br /> */}
+                <br />
                 <div className='displayContainer'>
                     <div className='backgroundImg'>
                         <Background id='backgroundImg' background={background} isBackgroundReady={isBackgroundReady} />
