@@ -14,7 +14,7 @@ import firebase from 'firebase'
 import Login from './components/login'
 import Display from './components/display'
 import PokeSel from './components/pokeSel'
-// import express from 'express'
+import axios from 'axios'
 
 /**********************************************
 *  *** FIREBASE LOGIN FOR GLOBAL SCOPE ***   *
@@ -49,46 +49,85 @@ class App extends Component {
  state = {
    isSignedIn: false,
    isPokeSel: false,
-   user_id: 'test',
-   isReady : false
+   user_id: 'test user_id',
+   isReady : false,
+   identifier : 'test Identifier'
    
  }
 
+ userObj = () => {
+   let tmp = {
+     user_id : this.state.user_id,
+     identifier :  this.state.identifier
+   }
+   return tmp
+ }
+
+ postUserTable = (response) => {
+   fetch('/user', {
+     method : 'POST',
+     headers : {
+       'Content-Type' : 'application/json'
+     },
+     body : JSON.stringify(response)
+   })
+    .then(_ => {
+      // We may have to do something here
+     
+    })
+    .catch(e => console.log(e))
+ }
 
 
-//  firebase.auth().then((firebase)=> {
-//    fetch('http://localhost:3001/users/checkSession', params: { uid: firebase.uid, email: firebase.identifier }).then(() => { setState... })
-//  })
-
-//  CHECK FOR STATE CHANGES IN LOGIN
+//  //CHECK FOR STATE CHANGES IN LOGIN
 //  componentWillMount() {
 //    firebase.auth().onAuthStateChanged(
-//      (user) => this.setState({ isSignedIn: !!user, user_id: user.uid, isReady : true }).fetch('http://localhost:3001/users/checkSession')
-//     .then(res => res.json())
-//     .then(
-//       (result) => {
-//         this.setState({
-//           isLoaded: true,
-//           items: result.items
-//         });
-//       },
+//      (user) => this.setState({ isSignedIn: !!user, user_id: user.uid, isReady : true })
 //    )
-
 //  }
 
-//try :
+// this.createUser(uid).then((user) => {})
 
-// componentWillMount() {
-//   firebase.auth().onAuthStateChanged((user) => {
-//  if (user) {
-//    (firebase.auth().currentUser !== null) 
-//        console.log("user id: " + firebase.auth().currentUser.uid);
-//    // User logged in already or has just logged in.
-//  } else {
-//    // User not logged in or has just logged out.
-//  }
-// });
- // Listen to the Firebase Auth state and set the local state.
+//axios :
+
+async createUser(uid) {
+  // const response = await axios.post("/user", uid);
+  const response = await axios.post("/user", { user_id: uid });
+  return response;
+}
+
+componentDidMount() {
+  this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(_ => {
+    // this.setState({ isSignedIn: !!user, user_id: user.uid });
+    // console.log(this.state.user_id);
+
+    // axios call to API and create user in sql database, then logs the response
+    // console.log(createUser({ user_id: user.uid }));
+    this.createUser().then((user) => this.setState({ isSignedIn: !! user, user_id: user.uid, isReady : true })
+       )
+     })
+    }
+  
+
+    //chad original code:
+
+  //   async createUser(uid) {
+  //     const response = await axios.post("/user", uid);
+  //     return response;
+  //   }
+  
+  // componentDidMount() {
+  //     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+  //       this.setState({ isSignedIn: !!user, user_id: user.uid });
+  //       console.log(this.state.user_id);
+  //       // axios call to API and create user in sql database, then logs the response
+  //       console.log(createUser({ user_id: user.uid }));
+  //     });
+  //   }
+
+
+
+//  // Listen to the Firebase Auth state and set the local state.
 //  componentDidMount() {
 //    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
 //      (user) => {
@@ -97,17 +136,6 @@ class App extends Component {
 //      }
 //    );
 //  }
-componentWillMount() {
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    // User logged in already or has just logged in.
-    
-    console.log(user.uid);
-  } else {
-    // User not logged in or has just logged out.
-  }
-});
-}
  // Make sure we un-register Firebase observers when the component unmounts.
  componentWillUnmount() {
    this.unregisterAuthObserver();
@@ -119,7 +147,8 @@ firebase.auth().onAuthStateChanged((user) => {
      <>
        <Router>
          <div>
-           <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id} />) : (<Login uiConfig={uiConfig} />)} />
+           {/* <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id} />) : (<Login uiConfig={uiConfig} />)} /> */}
+           <Route exact path='/' component={() => isSignedIn ? (<Login uiConfig={uiConfig} />) : (<Login uiConfig={uiConfig} />)} />
            <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id} />) : (<PokeSel />)} />
            <Route exact path='/display' component={() => isReady ? <Display user_id={user_id} /> : (<Login uiConfig={uiConfig} />)} />
          </div>

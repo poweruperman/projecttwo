@@ -3,6 +3,7 @@ const connection = require('../config')
 
 class Pokemon extends Sequelize.Model {}
 Pokemon.init({
+ 
  pokemon_name: {
      type: Sequelize.STRING,
      allowNull: false
