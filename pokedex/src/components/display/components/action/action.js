@@ -49,13 +49,13 @@ class Action extends Component {
                             {(() => {
                                 switch (firstSelInfo) {
                                     case 'feed' : 
-                                        return <Feed />
+                                        return <Feed actionStatus={this.props.actionStatus} />
                                     case 'sleep' : 
-                                        return <Sleep />
+                                        return <Sleep actionStatus={this.props.actionStatus} />
                                     case 'train' : 
-                                        return <Train />
+                                        return <Train actionStatus={this.props.actionStatus} />
                                     case 'play' : 
-                                        return <Play />
+                                        return <Play actionStatus={this.props.actionStatus} />
                                     default : 
                                         return null;
                                 }
