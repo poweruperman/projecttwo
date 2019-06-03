@@ -1,79 +1,76 @@
+import './action.css'
+
 import React, { Component } from 'react'
-
-// const diff = require('./time.js')
-// const sample = require('./route.js')
-
-// Feeding
-// const feed = () => {
-//     affection += 10
-//     exhaust += 10
-//     anger -= 10
-//     sadness -= 10
-//     hunger -= 10
-// }
-// Sleep
-     //function where user inputs the numbers of sleep hours 
-// const sleepAction = () => {
-//     let isAsleep = true
-//     let userHours
-//     const numHours = 8
-//     if(isAsleep = true){
-//         affection += 10
-//         anger -= 10
-//         sadness -= 10
-//         exhaust -= 10
-//     }
-//     else if (numHours != userHours) { //when sleep is interrupted
-//         anger += 10
-//         sadness += 10
-//         affection -= 10
-//     }
-//     else if (isAsleep != true){ //when awake
-//         exhaust +=10
-//     }
-// }
-// Train
-// const trainAction = () => {
-//     hunger += 10
-//     exhaust += 10
-//     affection -= 10
-//     boredom -=10
-// }
-// Park 
-// const parkAction = () => {
-//     affection += 10
-//     hunger += 10
-//     exhaust += 10
-//     boredom -= 10
-//     sadness -= 10
-//     anger -= 10
-// }
-// Pet
-// const petAction = () => {
-//     affection += 10
-//     boredom -= 10
-//     sadness -= 10
-//     anger -= 10
-// }
-//Play 
-//Clean //biggie maybe
-//Ignore
-// const ignoreAction = () => {
-//     sadness += 10
-//     anger += 10
-//     boredom += 10
-//     affection -= 10
-// }
+import Feed from './components/feed'
+import Sleep from './components/sleep'
+import Train from './components/train'
+import Play from './components/play'
 
 class Action extends Component {
-    render () {
+    state = {
+        firstSel: false,
+        firstSelInfo: '',
+        playSelInfo: '',
+        resetSel: false,
+    }
+    feedSelFunc = () => {
+        this.setState({
+            firstSel: true,
+            firstSelInfo: 'feed'
+        })
+    }
+    sleepSelFunc = () => {
+        this.setState({
+            firstSel: true,
+            firstSelInfo: 'sleep'
+        })
+    }
+    trainSelFunc = () => {
+        this.setState({
+            firstSel: true,
+            firstSelInfo: 'train'
+        })
+    }
+    playSelFunc = () => {
+        this.setState({
+            firstSel: true,
+            firstSelInfo: 'play'
+        })
+    }
+    render() {
+        const { isReady } = this.props
+        const { firstSel, firstSelInfo } = this.state
+
         return (
             <>
-                {/* All the action HTML will go in here */}
-                {/* Functions will have to be written outside of Render() */}
-                
+                {isReady ?
+                    firstSel ?
+                        <div>
+                            {(() => {
+                                switch (firstSelInfo) {
+                                    case 'feed' : 
+                                        return <Feed />
+                                    case 'sleep' : 
+                                        return <Sleep />
+                                    case 'train' : 
+                                        return <Train />
+                                    case 'play' : 
+                                        return <Play />
+                                    default : 
+                                        return null;
+                                }
+                            })()}
+                        </div>
+                        :
+                        <div className='actionContainer'>
+                            <button className='feed' onClick={this.feedSelFunc} >Feed</button>
+                            <button className='sleep' onClick={this.sleepSelFunc} >Sleep</button>
+                            <button className='train' onClick={this.trainSelFunc} >Train</button>
+                            <button className='play' onClick={this.playSelFunc} >Play</button>
+                        </div>
 
-
+                    : ''
+                }
             </>
         )
     }

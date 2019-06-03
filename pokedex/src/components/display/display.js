@@ -8,7 +8,6 @@ import TStatUpdate from './components/tStatUpdate'
 import Demand from './components/demand'
 import Sprite from './components/sprite'
 import Background from './components/background'
-import Loading from './components/loading'
 
 
 
@@ -36,7 +35,6 @@ class Display extends Component {
     }
     testFunc = () => {
         console.log(moment().format('YYYY-MM-DD kk:mm:ss'))
-        console.log(this.sampleObj())
     }
     testFunc2 = () => {
         this.setState(prevState => ({
@@ -119,12 +117,12 @@ class Display extends Component {
         const { user_id, front_img, back_img, background, isBackgroundReady, pokeState, affection, anger, boredom, exhaust, hunger, sadness, isReady } = this.state
         return (
             <>
-                {/* <button onClick={() => this.countDown()}>Get Join Data</button> */}
+                {/* <button onClick={() => this.countDown()}>Get Join Data</button>
                 <br />
                 <button onClick={() => this.testFunc()}>test btn : log the state</button>
                 <br />
                 <button onClick={() => this.testFunc2()}>test btn : change pokemon state</button>
-                <br />
+                <br /> */}
                 <div className='displayContainer'>
                     <div className='backgroundImg'>
                         <Background id='backgroundImg' background={background} isBackgroundReady={isBackgroundReady} />
@@ -136,7 +134,7 @@ class Display extends Component {
                         <TStatUpdate user_id={user_id} hunger={hunger} affection={affection} anger={anger} boredom={boredom} exhaust={exhaust} sadness={sadness} isReady ={isReady} />
                     </div>
                     <div className='Action'>
-                        <Action user_id={user_id} />
+                        <Action user_id={user_id} isReady={isReady} />
                     </div>
                 </div> 
             </>
