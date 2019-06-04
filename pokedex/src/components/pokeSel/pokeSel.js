@@ -52,15 +52,16 @@ class PokeSel extends Component {
             body: JSON.stringify(this.tmp)
         })
             .then(_ => {
-
+                // return and now display DISPLAY.js
             })
             .catch(e => console.log(e))
     }
-    getPokedex() {
-        let id = Math.floor(Math.random() * 151)
+    getPokedex(id) {
+        console.log(`Here's random ID : ${id}`)
         fetch(`/pokedex/${id}`)
             .then(r => r.json())
             .then(r => {
+                console.log(`Here's response from fetch : ${r}`)
                 this.tmp.pokemon_name = r.pokemon_name
                 this.tmp.front_img = r.front_img
                 this.tmp.back_img = r.back_img
@@ -77,10 +78,14 @@ class PokeSel extends Component {
                 this.tmp.canEvolve = r.canEvolve
                 this.tmp.user_id = this.props.user_id
                 this.tmp.user_name = this.props.identifier
-                this.setState({
-                    img: r.front_img,
-                    isReady: true
-                })
+                console.log(`Here's udpated tmp :${this.tmp}`)
+                setInterval(() => {
+                    this.setState({
+                        img: r.front_img,
+                        isReady: true
+                    })
+                }, 3000)
+                console.log(`Here's updated state : ${this.state}`)
             })
             .catch(e => console.log(e))
     }
@@ -89,7 +94,8 @@ class PokeSel extends Component {
         this.postJoinData()
     }
     componentDidMount = () => {
-        this.getPokedex()
+        let id = Math.floor(Math.random() * 151)
+        this.getPokedex(id)
     }
 
     render() {
