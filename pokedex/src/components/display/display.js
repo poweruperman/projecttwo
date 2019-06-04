@@ -8,6 +8,7 @@ import TStatUpdate from './components/tStatUpdate'
 import Demand from './components/demand'
 import Sprite from './components/sprite'
 import Background from './components/background'
+import Prompt from './components/prompt'
 
 
 
@@ -31,10 +32,10 @@ class Display extends Component {
         background: 'default.jpg',
         pokeState: false,
         isBackgroundReady: false,
-        isReady: false
-    }
-    testFunc = () => {
-        console.log(moment().format('YYYY-MM-DD kk:mm:ss'))
+        isReady: false,
+        isAsleep: false,
+        promptState: '',
+        promptWhat: ''
     }
     testFunc2 = () => {
         this.setState(prevState => ({
@@ -64,6 +65,7 @@ class Display extends Component {
                     sadnessT: r.sadnessT,
                     background: r.background,
                 })
+                this.happyCheck()
             })
             .catch(e => console.log(e))
     }
@@ -76,7 +78,6 @@ class Display extends Component {
             body: JSON.stringify(response)
         })
             .then(_ => {
-                // This is where you initiate TStatInformation Update
                 this.getJoinData(this.state.user_id)
             })
             .catch(e => console.log(e))
@@ -96,7 +97,6 @@ class Display extends Component {
             sadness: fSign ? (this.state.sadness + fVal) : (this.state.sadness - fVal),
             sadnessT: moment().format('YYYY-MM-DD kk:mm:ss')
         }
-        console.log(tmp.affection)
         return tmp
     }
     actionStatus = (dataFromChild) => {
@@ -110,10 +110,13 @@ class Display extends Component {
             case 'train':
                 break;
             case 'park':
+                this.actionStatusPark(dataFromChild)
                 break;
             case 'pet':
+                this.actionStatusPet(dataFromChild)
                 break;
             case 'toy':
+                this.actionStatusToy(dataFromChild)
                 break;
             default: break;
         }
@@ -121,54 +124,174 @@ class Display extends Component {
     actionStatusFeed = (obj) => {
         switch (obj.food) {
             case 'Candy':
-                    let CandyObj = this.objCreator(10, 1, 10, 0, 0, 0, 5, 1, 5, 0, 10, 0)
-                    this.putJoinData(this.state.user_id, CandyObj)
+                this.setState({
+                    promptState: obj.action,
+                    promptWhat: obj.food
+                })
+                let CandyObj = this.objCreator(3, 1, 3, 0, 0, 0, 2, 1, 2, 0, 3, 0)
+                this.stateCheck(CandyObj)
+                    .then(thisObj => {
+                        this.putJoinData(this.state.user_id, thisObj)
+                    })
+                    .catch(e => console.log(e))
                 break;
             case 'Meal':
-                    let MealObj = this.objCreator(3, 1, 5, 0, 0, 0, 10, 1, 5, 0)
-                    this.putJoinData(this.state.user_id, MealObj)
+                this.setState({
+                    promptState: obj.action,
+                    promptWhat: obj.food
+                })
+                let MealObj = this.objCreator(3, 1, 2, 0, 0, 0, 3, 1, 2, 0)
+                this.stateCheck(MealObj)
+                    .then(thisObj => {
+                        this.putJoinData(this.state.user_id, thisObj)
+                    })
+                    .catch(e => console.log(e))
                 break;
             case 'Drink':
-                    let DrinkObj = this.objCreator(0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0)
-                    this.putJoinData(this.state.user_id, DrinkObj)
+                this.setState({
+                    promptState: obj.action,
+                    promptWhat: obj.food
+                })
+                let DrinkObj = this.objCreator(0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0)
+                this.stateCheck(DrinkObj)
+                    .then(thisObj => {
+                        this.putJoinData(this.state.user_id, thisObj)
+                    })
+                    .catch(e => console.log(e))
                 break;
             default: break;
         }
     }
+    actionStatusPark = (obj) => {
+        this.setState({
+            promptState: obj.action
+        })
+        let ParkObj = this.objCreator(3, 1, 3, 0, 3, 0, 3, 1, 3, 1, 3, 0)
+        this.stateCheck(ParkObj)
+            .then(thisObj => {
+                this.putJoinData(this.state.user_id, thisObj)
+            })
+            .catch(e => console.log(e))
+    }
+    actionStatusPet = (obj) => {
+        this.setState({
+            promptState: obj.action
+        })
+        let PetObj = this.objCreator(3, 1, 3, 0, 5, 1, 0, 0, 0, 0, 3, 0)
+        this.stateCheck(PetObj)
+            .then(thisObj => {
+                this.putJoinData(this.state.user_id, thisObj)
+            })
+            .catch(e => console.log(e))
+    }
+    actionStatusToy = (obj) => {
+        switch (obj.toy) {
+            case 'whip':
+                this.setState({
+                    promptState: obj.action,
+                    promptWhat: obj.toy
+                })
+                let whipObj = this.objCreator(10, 0, 6, 1, 0, 0, 0, 0, 0, 0, 4, 1)
+                this.stateCheck(whipObj)
+                    .then(thisObj => {
+                        this.putJoinData(this.state.user_id, thisObj)
+                    })
+                    .catch(e => console.log(e))
+                break;
+            case 'eevee doll':
+                this.setState({
+                    promptState: obj.action,
+                    promptWhat: obj.toy
+                })
+                let eeveeObj = this.objCreator(2, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0)
+                this.stateCheck(eeveeObj)
+                    .then(thisObj => {
+                        this.putJoinData(this.state.user_id, thisObj)
+                    })
+                    .catch(e => console.log(e))
+                break;
+            case 'knife':
+                this.setState({
+                    promptState: obj.action,
+                    promptWhat: obj.toy
+                })
+                let knifeObj = this.objCreator(3, 0, 6, 1, 0, 0, 0, 0, 0, 0, 3, 1)
+                this.stateCheck(knifeObj)
+                    .then(thisObj => {
+                        this.putJoinData(this.state.user_id, thisObj)
+                    })
+                    .catch(e => console.log(e))
+                break;
+            case 'pikachu hat':
+                this.setState({
+                    promptState: obj.action,
+                    promptWhat: obj.toy
+                })
+                let pikachuObj = this.objCreator(2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                this.stateCheck(pikachuObj)
+                    .then(thisObj => {
+                        this.putJoinData(this.state.user_id, thisObj)
+                    })
+                    .catch(e => console.log(e))
+                break;
+            default: break;
+        }
+    }
+    async stateCheck(obj) {
+        let response = await new Promise((resolve, reject) => {
+            if (typeof obj === 'object') {
+                Object.keys(obj).forEach(elem => {
+                    if (elem === 'affection' || elem === 'anger' || elem === 'boredom' || elem === 'exhaust' || elem === 'hunger' || elem === 'sadness') {
+                        if (obj[elem] <= 0) {
+                            obj[elem] = 0
+                        } else if (obj[elem] >= 100) {
+                            obj[elem] = 100
+                        }
+                    }
+                })
+                resolve(obj)
+            } else {
+                reject(new Error('No object was passed'))
+            }
 
+        })
+        return response
+    }
+    happyCheck = () => {
+        let tmpTotal = this.state.anger + this.state.boredom + this.state.exhaust + this.state.hunger + this.state.sadness + (100 - this.state.affection)
+        tmpTotal <= 180 ? this.setState({ pokeState: true }) : this.setState({ pokeState: false })
+
+    }
+    randNum = () => {
+        return (Math.floor(Math.random() * 5) * 1000 + 5000)
+    }
     componentDidMount = () => {
         this.getJoinData(this.state.user_id)
+        console.log(this.randNum())
         setTimeout(() => {
             this.setState({
                 isBackgroundReady: true,
                 isReady: true
             })
-        }, 5000)
-        // setInterval(() => {
-        //     let tmp = this.objCreator(1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
-        //     this.putJoinData(this.state.user_id, tmp)
-        // }, 10000)
+        }, this.randNum())
         setInterval(() => {
             let tmp = this.objCreator(1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
             this.putJoinData(this.state.user_id, tmp)
         }, 1800000)
     }
     render() {
-        const { user_id, front_img, back_img, background, isBackgroundReady, pokeState, affection, anger, boredom, exhaust, hunger, sadness, isReady } = this.state
+        const { user_id, front_img, back_img, background, isBackgroundReady, pokeState, affection, anger, boredom, exhaust, hunger, sadness, promptState, promptWhat, isReady } = this.state
         return (
             <>
-                {/* <button onClick={() => this.countDown()}>Get Join Data</button>
-                <br />
-                <button onClick={() => this.testFunc()}>test btn : log the state</button>
-                <br />
-                <button onClick={() => this.testFunc2()}>test btn : change pokemon state</button>
-                <br /> */}
                 <div className='displayContainer'>
                     <div className='backgroundImg'>
                         <Background id='backgroundImg' background={background} isBackgroundReady={isBackgroundReady} />
                     </div>
                     <div className='pokemonSprite'>
                         <Sprite user_id={user_id} front_img={front_img} back_img={back_img} pokeState={pokeState} isReady={isReady} />
+                    </div>
+                    <div className='prompt'>
+                        <Prompt user_id={user_id} pokeState={pokeState} isReady={isReady} promptState={promptState} promptWhat={promptWhat} />
                     </div>
                     <div className='TStatUpdate'>
                         <TStatUpdate user_id={user_id} hunger={hunger} affection={affection} anger={anger} boredom={boredom} exhaust={exhaust} sadness={sadness} isReady={isReady} />
