@@ -11,9 +11,9 @@ class Prompt extends Component {
         return (
             <>
                 {isReady ?
-                    pokeState ? <div classNme='prompt'>Your pokemon is fairly content I guess?</div>
+                    pokeState ? <div className='prompt'>Your pokemon is fairly content I guess?</div>
                         :
-                        <div classNme='prompt'>Your pokemon is pissed dawg</div>
+                        <div className='prompt'>Your pokemon is pissed dawg</div>
                     :
                     ''
                 }
@@ -24,40 +24,40 @@ class Prompt extends Component {
                                 return (() => {
                                     switch (promptWhat) {
                                         case 'Candy':
-                                            return <div classNme='prompt'>You just fed Candy to your pokemon</div>
+                                            return <div className='prompt'>You just fed Candy to your pokemon</div>
                                         case 'Meal':
-                                            return <div classNme='prompt'>Your pokemon just had a meal</div>
+                                            return <div className='prompt'>Your pokemon just had a meal</div>
                                         case 'Drink':
-                                            return <div classNme='prompt'>Your pokemon just had a drink</div>
+                                            return <div className='prompt'>Your pokemon just had a drink</div>
                                         default:
                                             return null
                                     }
                                 })()
                             case 'sleep':
-                                return <div classNme='prompt'></div>
+                                return <div className='prompt'>Your Pokmon is now asleep. Wake him up and he will definitly be pissed</div>
                             case 'train':
-                                return <div classNme='prompt'>Nobody wants to train. But your pokemon did. All because of you</div>
+                                return <div className='prompt'>Nobody wants to train. But your pokemon did. All because of you</div>
                             case 'park':
-                                return <div classNme='prompt'>Great job! you dragged yo ass out of your house to the park with yo pokemon</div>
+                                return <div className='prompt'>Great job! you dragged yo ass out of your house to the park with yo pokemon</div>
                             case 'pet':
-                                return <div classNme='prompt'>You just petted your pokemon! Hope your pokemon isn't on fire</div>
+                                return <div className='prompt'>You just petted your pokemon! Hope your pokemon isn't on fire</div>
                             case 'toy':
                                 return (() => {
                                     switch (promptWhat) {
                                         case 'whip':
-                                            return <div classNme='prompt'>The only toy you had was a whip...You just whipped your pokemon...What is wrong with you...You sick crazy bastard</div>
+                                            return <div className='prompt'>The only toy you had was a whip...You just whipped your pokemon...What is wrong with you...You sick crazy bastard</div>
                                         case 'eevee doll':
-                                            return <div classNme='prompt'>You just gave an eevee doll to your pokemon. Pokemon looks at you and wonders why</div>
+                                            return <div className='prompt'>You just gave an eevee doll to your pokemon. Pokemon looks at you and wonders why</div>
                                         case 'knife':
-                                            return <div classNme='prompt'>OH NO! Your pokemon played with a knife! Pokemon cut itself! Why are you just standing there?!</div>
+                                            return <div className='prompt'>OH NO! Your pokemon played with a knife! Pokemon cut itself! Why are you just standing there?!</div>
                                         case 'pikachu hat':
-                                            return <div classNme='prompt'>You just gave pikachu hat to your pokemon. I guess it's a great toy...?</div>
+                                            return <div className='prompt'>You just gave pikachu hat to your pokemon. I guess it's a great toy...?</div>
                                         default:
                                             return null
                                     }
                                 })()
                             default:
-                                return <div classNme='prompt'>Best way to raise pokemon is to let it go. Pokemon belongs to the wild.</div>
+                                return <div className='prompt'>Best way to raise pokemon is to let it go. Pokemon belongs to the wild.</div>
                         }
                     })()
                     :
