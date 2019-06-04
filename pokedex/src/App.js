@@ -3,7 +3,6 @@ import './App.css'
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import firebase from 'firebase'
-// import { Button } from 'reactstrap'
 import Login from './components/login'
 import Display from './components/display'
 import PokeSel from './components/pokeSel'
@@ -37,24 +36,28 @@ const uiConfig = {
 };
 /**********************************************/
 
+
+
+
 class App extends Component {
   state = {
     isSignedIn: false,
     isPokeSel: false,
     user_id: 'test',
     isReady: false,
-    identifier: 'test identifier'
+    identifier: 'test identifier',
+    isPokeSelReady : false
   }
 
   postUserData = (uid, email) => {
     fetch('/user', {
       method: 'POST',
-      headers : {
-        'Content-Type' : 'application/json'
+      headers: {
+        'Content-Type': 'application/json'
       },
-      body : JSON.stringify({
-        user_id : uid,
-        identifier : email
+      body: JSON.stringify({
+        user_id: uid,
+        identifier: email
       })
     })
       .then(_ => {
@@ -67,46 +70,72 @@ class App extends Component {
       .then(r => r.json())
       .then(r => {
         console.log(r)
-        if (r === null ) {
-          this.setState({ isPokeSel : false })
+        if (r === null) {
+          this.setState({ isPokeSel: false })
         } else {
-          this.setState({ isPokeSel : true })
+          if (r.pokemon_name.length >= 1) {
+            this.setState({ 
+              isPokeSel: true,
+              isPokeSelReady : true
+            })
+          } else {
+            this.setState({ isPokeSel : false})
+          }
         }
-        console.log(`this is also PokeSel${this.state.isPokeSel}`)
+        console.log(`this is also isPokeSel : ${this.state.isPokeSel}`)
       })
       .catch(e => console.log(e))
   }
 
-  // Listen to the Firebase Auth state and set the local state.
   componentDidMount = () => {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       this.setState({
-        isSignedIn : true,
-        user_id : user.uid,
-        identifier : user.email
+        isSignedIn: true,
+        user_id: user.uid,
+        identifier: user.email
       })
       this.postUserData(user.uid, user.email)
       this.isPokeSelFunc(user.uid)
       setTimeout(() => {
-        this.setState({ isReady : true })
-        console.log(`pokeSel : ${this.state.isPokeSel}`)
-        console.log(`isReady : ${this.state.isReady }`)
+        this.setState({ isReady: true })
+        console.log(`ispokeSel : ${this.state.isPokeSel}`)
+        console.log(`isReady : ${this.state.isReady}`)
       }, 3000)
     })
   }
 
 
-  // Make sure we un-register Firebase observers when the component unmounts.
   componentWillUnmount() {
     this.unregisterAuthObserver();
   }
   render() {
-    const { isSignedIn, isPokeSel, user_id, isReady } = this.state
+    const { isSignedIn, isPokeSel, user_id, isReady, isPokeSelReady } = this.state
     return (
       <>
         <Router>
           <div>
-            <Route exact path='/' component={() => isSignedIn ? (isReady ? (isPokeSel ? <Display user_id={user_id} /> : <PokeSel user_id={user_id} isReady={isReady} />) : '') : (<Login uiConfig={uiConfig} />)} />
+            {/* <Route exact path='/' component={() => {
+              if (isSignedIn)
+                return ''
+              else
+                return ''
+            }} /> */}
+            {/* <Route exact path='/' component={() => isSignedIn ? (isReady ? (isPokeSel ? <Display user_id={user_id} /> : <PokeSel user_id={user_id} isReady={isReady} />) : '') : (<Login uiConfig={uiConfig} />)} /> */}
+            <Route exact path='/' component={() =>
+              isSignedIn ? (
+                isReady ? (
+                  isPokeSel ? (
+                    <Display user_id={user_id} />
+                  ) : (
+                      <div>Hello Guys</div>
+                      // <PokeSel user_id={user_id} isPokeSelReady={isPokeSelReady} />
+                    )
+                ) : (
+                    ''
+                  )
+              ) : (
+                  <Login uiConfig={uiConfig} />
+                )} />
           </div>
         </Router>
       </>

@@ -34,7 +34,14 @@ class Prompt extends Component {
                                     }
                                 })()
                             case 'sleep':
-                                return <div className='prompt'>Your Pokmon is now asleep. Wake him up and he will definitly be pissed</div>
+                                return (() => {
+                                    switch (promptWhat) {
+                                        case 'woke' : 
+                                        return <div className='prompt'>Great job. You just woke your sleeping pokemon. He is PISSED</div>
+                                    default : 
+                                        return <div className='prompt'>Your Pokmon is now asleep. Wake him up and he will definitly be pissed</div>
+                                    }
+                                })()
                             case 'train':
                                 return <div className='prompt'>Nobody wants to train. But your pokemon did. All because of you</div>
                             case 'park':

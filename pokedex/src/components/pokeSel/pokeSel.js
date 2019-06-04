@@ -7,13 +7,13 @@ let moment = require("moment");
 
 class PokeSel extends Component {
     state = {
-        isReady : false,
-        img : ''
+        isReady: false,
+        img: ''
     }
     tmp = {
-        user_id : '',
-        user_name : '',
-        pokemon_nickname : '',
+        user_id: '',
+        user_name: '',
+        pokemon_nickname: '',
         hunger: '50',
         hungerT: moment().format('YYYY-MM-DD kk:mm:ss'),
         exhaust: '50',
@@ -26,33 +26,33 @@ class PokeSel extends Component {
         angerT: moment().format('YYYY-MM-DD kk:mm:ss'),
         sadness: '50',
         sadnessT: moment().format('YYYY-MM-DD kk:mm:ss'),
-        pokemon_name : '',
-        front_img : '',
-        back_img : '',
-        type_1 : '',
-        type_2 : '',
-        hp : '',
-        attack : '',
-        defense : '',
-        sp_attack : '',
-        sp_defense : '',
-        speed : '',
-        background : '',
-        isBaby : '',
-        canEvolve : '',
-        createAt : moment().format('YYYY-MM-DD kk:mm:ss'),
-        updatedAt : moment().format('YYYY-MM-DD kk:mm:ss'),
+        pokemon_name: '',
+        front_img: '',
+        back_img: '',
+        type_1: '',
+        type_2: '',
+        hp: '',
+        attack: '',
+        defense: '',
+        sp_attack: '',
+        sp_defense: '',
+        speed: '',
+        background: '',
+        isBaby: '',
+        canEvolve: '',
+        createAt: moment().format('YYYY-MM-DD kk:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD kk:mm:ss'),
     }
     postJoinData = (user_id) => {
         fetch('/join', {
-            method : 'POST',
-            headers : {
-                'Content-Type' : 'application/json'
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(this.tmp)
         })
             .then(_ => {
-                
+
             })
             .catch(e => console.log(e))
     }
@@ -77,9 +77,9 @@ class PokeSel extends Component {
                 this.tmp.canEvolve = r.canEvolve
                 this.tmp.user_id = this.props.user_id
                 this.tmp.user_name = this.props.identifier
-                this.setState({ 
-                    img : r.front_img,
-                    isReady : true
+                this.setState({
+                    img: r.front_img,
+                    isReady: true
                 })
             })
             .catch(e => console.log(e))
@@ -92,21 +92,26 @@ class PokeSel extends Component {
         this.getPokedex()
     }
 
-render() {
-    const { user_id } = this.props
-    const { isReady, img } = this.state
-    return (
-        <>
-            <div className='pokeSelContainer'>
-                { isReady ? 
-                    <Sprite img={img} setNickName={this.setNickName} />
-                    :
-                    ''
-                }
-            </div>
-        </>
-    )
-}
+    render() {
+        const { user_id, isPokeSelReady } = this.props
+        const { isReady, img } = this.state
+        return (
+            <>
+                <div className='pokeSelContainer'>
+                    {isPokeSelReady ? (
+                        isReady ? (
+                            <Sprite img={img} setNickName={this.setNickName} />
+                        ) : (
+                                ''
+                            )
+                    ) : (
+                            ''
+                        )
+                    }
+                </div>
+            </>
+        )
+    }
 }
 
 export default PokeSel
