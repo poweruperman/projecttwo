@@ -10,11 +10,12 @@ import './App.css'
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import firebase from 'firebase'
-import { Button } from 'reactstrap'
+// import { Button } from 'reactstrap'
 import Login from './components/login'
 import Display from './components/display'
 import PokeSel from './components/pokeSel'
 import axios from 'axios'
+
 
 /**********************************************
 *  *** FIREBASE LOGIN FOR GLOBAL SCOPE ***   *
@@ -109,7 +110,7 @@ componentDidMount() {
     // axios call to API and create user in sql database, then logs the response
     // console.log(createUser({ user_id: user.uid }));
     this.createUser(user.uid, user.email).then(response => {
-      
+    
     })
     // .then((user) => 
     

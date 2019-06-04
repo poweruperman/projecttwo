@@ -9,23 +9,30 @@
     text-shadow: -1px 0 yellow;
     font-family: 'PokemonFont';
     font-size: 260%;
-
+    
 }
 
 #instrc {
     text-align: left;
-    text-shadow: -1px 0 yellow;
-    font-family: 'PokemonFont';
+    /* text-shadow: -1px 0 yellow; */
+    background-color: white;
+    font-family: 'Bitter', serif;
     font-size: 100%;
     margin-left: 25px;
+ 
 }
-
 #pokeball {
     margin-right: -40%;
 }
 
 .blinking{
+
+    border-radius: 5px;
     animation:blinkingText 0.8s infinite;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 @keyframes blinkingText{
     0%{     color: #000;    }
