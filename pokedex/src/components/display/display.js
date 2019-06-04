@@ -100,34 +100,9 @@ class Display extends Component {
         return tmp
     }
     actionStatus = (dataFromChild) => {
+        console.log(this.state)
         if (this.state.isAsleep) {
-            switch (dataFromChild.action) {
-                case 'feed':
-                    this.actionStatusFeed(dataFromChild)
-                    break;
-                case 'sleep':
-                    this.actionStatusSleep(dataFromChild)
-                    break;
-                case 'train':
-                    break;
-                case 'park':
-                    this.actionStatusPark(dataFromChild)
-                    break;
-                case 'pet':
-                    this.actionStatusPet(dataFromChild)
-                    break;
-                case 'toy':
-                    this.actionStatusToy(dataFromChild)
-                    break;
-                default: break;
-            }
-            let wokeObj = this.objCreator(50, 0, 50, 1, 0, 0, 20, 1, 0, 0, 0, 0)
-            this.stateCheck(wokeObj)
-                .then(thisObj => {
-                    this.putJoinData(this.state.user_id, thisObj)
-                    this.setState({ isAsleep : false})
-                })
-                .catch(e => console.log(e))
+            this.wokeAnger()
         } else {
             switch (dataFromChild.action) {
                 case 'feed':
@@ -150,6 +125,19 @@ class Display extends Component {
                 default: break;
             }
         }
+    }
+    wokeAnger = () => {
+        let wokeObj = this.objCreator(100, 0, 100, 1, 0, 0, 20, 1, 0, 0, 0, 0)
+        this.stateCheck(wokeObj)
+            .then(thisObj => {
+                this.putJoinData(this.state.user_id, thisObj)
+                this.setState({ 
+                    promptState : 'sleep',
+                    promptWhat : 'woke',
+                    isAsleep: false 
+                })
+            })
+            .catch (e => console.log(e))
     }
     actionStatusFeed = (obj) => {
         switch (obj.food) {
@@ -193,7 +181,15 @@ class Display extends Component {
         }
     }
     actionStatusSleep = (obj) => {
-
+        this.setState({
+            promptState: obj.action,
+            isAsleep: true
+        })
+        let sleepObj = this.objCreator(5, 1, 0, 0, 0, 0, 5, 0, 5, 1, 0, 0)
+        this.stateCheck(sleepObj)
+            .then(thisObj => {
+                this.putJoinData(this.state.user_id, thisObj)
+            })
     }
     actionStatusPark = (obj) => {
         this.setState({
