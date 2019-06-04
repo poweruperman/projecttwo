@@ -69,10 +69,10 @@ class Action extends Component {
                         </div>
                         :
                         <div className='actionContainer'>
-                            <button className='feed' onClick={this.feedSelFunc} >Feed</button>
-                            <button className='sleep' onClick={this.sleepSelFunc} >Sleep</button>
-                            <button className='train' onClick={this.trainSelFunc} >Train</button>
-                            <button className='play' onClick={this.playSelFunc} >Play</button>
+                            <button className='currentBtn' id='feedid' onClick={this.feedSelFunc} >Feed</button>
+                            <button className='currentBtn' id='sleepid' onClick={this.sleepSelFunc} >Sleep</button>
+                            <button className='currentBtn' id='trainid' onClick={this.trainSelFunc} >Train</button>
+                            <button className='currentBtn' id='playid' onClick={this.playSelFunc} >Play</button>
                         </div>
 
                     : ''
