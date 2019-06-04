@@ -100,25 +100,55 @@ class Display extends Component {
         return tmp
     }
     actionStatus = (dataFromChild) => {
-        //use data from Child here
-        switch (dataFromChild.action) {
-            case 'feed':
-                this.actionStatusFeed(dataFromChild)
-                break;
-            case 'sleep':
-                break;
-            case 'train':
-                break;
-            case 'park':
-                this.actionStatusPark(dataFromChild)
-                break;
-            case 'pet':
-                this.actionStatusPet(dataFromChild)
-                break;
-            case 'toy':
-                this.actionStatusToy(dataFromChild)
-                break;
-            default: break;
+        if (this.state.isAsleep) {
+            switch (dataFromChild.action) {
+                case 'feed':
+                    this.actionStatusFeed(dataFromChild)
+                    break;
+                case 'sleep':
+                    this.actionStatusSleep(dataFromChild)
+                    break;
+                case 'train':
+                    break;
+                case 'park':
+                    this.actionStatusPark(dataFromChild)
+                    break;
+                case 'pet':
+                    this.actionStatusPet(dataFromChild)
+                    break;
+                case 'toy':
+                    this.actionStatusToy(dataFromChild)
+                    break;
+                default: break;
+            }
+            let wokeObj = this.objCreator(50, 0, 50, 1, 0, 0, 20, 1, 0, 0, 0, 0)
+            this.stateCheck(wokeObj)
+                .then(thisObj => {
+                    this.putJoinData(this.state.user_id, thisObj)
+                    this.setState({ isAsleep : false})
+                })
+                .catch(e => console.log(e))
+        } else {
+            switch (dataFromChild.action) {
+                case 'feed':
+                    this.actionStatusFeed(dataFromChild)
+                    break;
+                case 'sleep':
+                    this.actionStatusSleep(dataFromChild)
+                    break;
+                case 'train':
+                    break;
+                case 'park':
+                    this.actionStatusPark(dataFromChild)
+                    break;
+                case 'pet':
+                    this.actionStatusPet(dataFromChild)
+                    break;
+                case 'toy':
+                    this.actionStatusToy(dataFromChild)
+                    break;
+                default: break;
+            }
         }
     }
     actionStatusFeed = (obj) => {
@@ -161,6 +191,9 @@ class Display extends Component {
                 break;
             default: break;
         }
+    }
+    actionStatusSleep = (obj) => {
+
     }
     actionStatusPark = (obj) => {
         this.setState({
