@@ -300,7 +300,6 @@ class Display extends Component {
     }
     componentDidMount = () => {
         this.getJoinData(this.state.user_id)
-        console.log(this.randNum())
         setTimeout(() => {
             this.setState({
                 isBackgroundReady: true,
