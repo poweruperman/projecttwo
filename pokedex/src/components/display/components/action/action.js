@@ -37,6 +37,12 @@ class Action extends Component {
             firstSelInfo: 'play'
         })
     }
+    reset = () => {
+        this.setState({
+            firstSel: false,
+            firstSelInfo: ''
+        })
+    }
     render() {
         const { isReady } = this.props
         const { firstSel, firstSelInfo } = this.state
@@ -45,17 +51,17 @@ class Action extends Component {
             <>
                 {isReady ?
                     firstSel ?
-                        <div>
+                        <div className='actionContainer'>
                             {(() => {
                                 switch (firstSelInfo) {
                                     case 'feed' : 
-                                        return <Feed />
+                                        return <Feed className='currentAct' actionStatus={this.props.actionStatus} reset={this.reset}/>
                                     case 'sleep' : 
-                                        return <Sleep />
+                                        return <Sleep className='currentAct' actionStatus={this.props.actionStatus} reset={this.reset}/>
                                     case 'train' : 
-                                        return <Train />
+                                        return <Train className='currentAct' actionStatus={this.props.actionStatus} reset={this.reset}/>
                                     case 'play' : 
-                                        return <Play />
+                                        return <Play className='currentAct' actionStatus={this.props.actionStatus} reset={this.reset}/>
                                     default : 
                                         return null;
                                 }
