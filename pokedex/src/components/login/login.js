@@ -21,7 +21,7 @@ class Login extends Component {
             <div id="login">
               <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </div>
-            <h2 id="intro" span class="blinking"> Welcome to Pokegatchi !</h2>
+            <h2 id="intro" className="blinking"> Welcome to Pokegatchi !</h2>
             <p id="instrc">This is a fusion of Pokemon and Tamagotchi, where you get the
           best <br></br> of both worlds of raising your very own Pokemon! Feed it,
           play with it, love <br></br>and care for
