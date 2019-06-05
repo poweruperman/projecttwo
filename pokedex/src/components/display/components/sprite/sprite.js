@@ -11,8 +11,8 @@ class Sprite extends Component {
             <>
             {isReady ? 
                 pokeState ? 
-                    <img src={front_img} alt='front'/> 
-                    : <img src={back_img} alt='back' /> 
+                    <img src={front_img} alt='front' className='spriteImg' /> 
+                    : <img src={back_img} alt='back'  className='spriteImg' /> 
                 : null}
             </>
         )
