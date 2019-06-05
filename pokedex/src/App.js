@@ -76,13 +76,14 @@ class App extends Component {
    const { isSignedIn, isPokeSel, user_id, isReady } = this.state
    return (
      <>
-       <Router>
-         <div>
-           <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id} />) : (<Login uiConfig={uiConfig} />)} />
-           <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id} />) : (<PokeSel />)} />
-           <Route exact path='/display' component={() => isReady ? <Display user_id={user_id} /> : (<Login uiConfig={uiConfig} />)} />
-         </div>
-       </Router>
+      <Router>
+          <div>
+            {/* <Route exact path='/' component={() => isSignedIn ? (<Display user_id={user_id} />) : (<Login uiConfig={uiConfig} />)} /> */}
+            <Route exact path='/' component={() => isSignedIn ? (<Login uiConfig={uiConfig} />) : (<Login uiConfig={uiConfig} />)} />
+            <Route exact path='/login' component={() => isPokeSel ? (<Display user_id={user_id} />) : (<PokeSel />)} />
+            <Route exact path='/display' component={() => isReady ? <Display user_id={user_id} /> : (<Login uiConfig={uiConfig} />)} />
+          </div>
+        </Router>
      </>
    )
  }
