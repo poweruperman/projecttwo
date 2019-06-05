@@ -318,9 +318,13 @@ class Display extends Component {
                     <div className='pokemonSprite'>
                         <Sprite user_id={user_id} front_img={front_img} back_img={back_img} pokeState={pokeState} isReady={isReady} />
                     </div>
-                    <div className='prompt'>
-                        <Prompt user_id={user_id} pokeState={pokeState} isReady={isReady} promptState={promptState} promptWhat={promptWhat} />
-                    </div>
+                    {isReady ? 
+
+                        <div className='prompt'>
+                            <Prompt user_id={user_id} pokeState={pokeState} isReady={isReady} promptState={promptState} promptWhat={promptWhat} />
+                        </div>
+                    : null
+                    }
                     <div className='TStatUpdate'>
                         <TStatUpdate user_id={user_id} hunger={hunger} affection={affection} anger={anger} boredom={boredom} exhaust={exhaust} sadness={sadness} isReady={isReady} />
                     </div>
