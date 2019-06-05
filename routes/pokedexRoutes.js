@@ -9,8 +9,10 @@ module.exports = app => {
     })
 
     app.get('/pokedex/:id', (req, res) => {
+        // console.log('hellloooo', req.params.id)
         Pokedex.findOne({ where: {id: req.params.id}})
             .then(pokedex => res.json(pokedex))
+        
             .catch(e => console.log(e))
     })
 

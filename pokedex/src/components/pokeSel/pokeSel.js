@@ -53,8 +53,11 @@ class PokeSel extends Component {
     getPokedex(id) {
         fetch(`/pokedex/${id}`)
             .then(r => r.json())
+            
             .then(r => {
-                console.log(r)
+                // console.log(r)
+               
+
                 this.tmp.pokemon_name = r.pokemon_name
                 this.tmp.front_img = r.front_img
                 this.tmp.back_img = r.back_img
