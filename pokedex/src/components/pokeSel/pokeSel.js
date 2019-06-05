@@ -8,6 +8,7 @@ let moment = require("moment");
 class PokeSel extends Component {
     state = {
         isReady: false,
+        randNum: null,
         img: ''
     }
     tmp = {
@@ -43,25 +44,17 @@ class PokeSel extends Component {
         createAt: moment().format('YYYY-MM-DD kk:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD kk:mm:ss'),
     }
-    postJoinData = (user_id) => {
-        fetch('/join', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.tmp)
-        })
-            .then(_ => {
-                // return and now display DISPLAY.js
-            })
-            .catch(e => console.log(e))
+    componentWillMount = () => {
+        this.setState({ randNum: Math.floor(Math.random() * 151) })
+    }
+    componentDidMount = () => {
+        this.getPokedex(this.state.randNum)
     }
     getPokedex(id) {
-        console.log(`Here's random ID : ${id}`)
         fetch(`/pokedex/${id}`)
             .then(r => r.json())
             .then(r => {
-                console.log(`Here's response from fetch : ${r}`)
+                console.log(r)
                 this.tmp.pokemon_name = r.pokemon_name
                 this.tmp.front_img = r.front_img
                 this.tmp.back_img = r.back_img
@@ -78,14 +71,25 @@ class PokeSel extends Component {
                 this.tmp.canEvolve = r.canEvolve
                 this.tmp.user_id = this.props.user_id
                 this.tmp.user_name = this.props.identifier
-                console.log(`Here's udpated tmp :${this.tmp}`)
-                setInterval(() => {
-                    this.setState({
-                        img: r.front_img,
-                        isReady: true
-                    })
-                }, 3000)
-                console.log(`Here's updated state : ${this.state}`)
+                this.setState({
+                    img: r.front_img,
+                    isReady: true
+                })
+                console.log(this.state.isReady)
+                console.log(this.state.img)
+            })
+            .catch(e => console.log(e))
+    }
+    postJoinData = () => {
+        fetch('/join', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.tmp)
+        })
+            .then(_ => {
+                this.props.pokeSelected(true)
             })
             .catch(e => console.log(e))
     }
@@ -93,26 +97,17 @@ class PokeSel extends Component {
         this.tmp.pokemon_nickname = name
         this.postJoinData()
     }
-    componentDidMount = () => {
-        let id = Math.floor(Math.random() * 151)
-        this.getPokedex(id)
-    }
-
     render() {
         const { user_id, isPokeSelReady } = this.props
         const { isReady, img } = this.state
         return (
             <>
                 <div className='pokeSelContainer'>
-                    {isPokeSelReady ? (
-                        isReady ? (
-                            <Sprite img={img} setNickName={this.setNickName} />
-                        ) : (
-                                ''
-                            )
-                    ) : (
-                            ''
-                        )
+                    {
+                        isReady ?
+                        <Sprite img={img} setNickName={this.setNickName} />
+                        :
+                        ''
                     }
                 </div>
             </>
