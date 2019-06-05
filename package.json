@@ -18,9 +18,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "pokedex": "cd pokedex && npm run start",
-    "install": "cd pokedex && npm install",
-    "build": "cd pokedex && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "repository": {
