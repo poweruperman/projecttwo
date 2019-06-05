@@ -19,8 +19,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node server.js",
-    "start" : "cd pokedex && npm start"
+    "start": "node server.js",
+    "client" : "cd pokedex && npm start"
   },
   "repository": {
     "type": "git",
