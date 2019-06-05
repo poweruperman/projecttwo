@@ -26,17 +26,22 @@ class Login extends Component {
             </div>
             <h2 id="intro" span class="blinking"> Welcome to Pokegatchi !</h2>
             <div id="paraID">
+            
             <p id="instrc" >This is a fusion of Pokemon and Tamagotchi, where you get the
           best <br></br> of both worlds of raising your very own Pokemon! Feed it,
           play with it, love <br></br>and care for
           your very own Pokegatchi!<br></br>
-          
+          <br></br>
+        
             </p>
             </div>
             <div id="pokeball">
             <iframe src="https://giphy.com/embed/JgCZ2hksM1abS" title ="pokemonFrame" width="65" height="150" frameBorder="0" alignt="right" id="pokeball"></iframe><a href="https://giphy.com/stickers/pokeball-JgCZ2hksM1abS"></a>
             </div>
             {/* <iframe src="https://giphy.com/embed/JgCZ2hksM1abS" width="250" height="250" frameBorder="0" alignt="right" id="pokeball"></iframe><a href="https://giphy.com/stickers/pokeball-JgCZ2hksM1abS"></a> */}
+            <br></br>
+            <br></br>
+            <br></br>
           </Card>
      
         </Container>

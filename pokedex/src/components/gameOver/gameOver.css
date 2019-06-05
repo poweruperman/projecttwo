@@ -1,0 +1,52 @@
+body{
+    background-image: url('https://i.gifer.com/6OV3.gif');
+    background-size: contain;
+}
+
+.whitebox {
+    background-color: white;
+    color: black;
+    height: 230px;
+    width: 400px;
+    margin: auto;
+    margin-top: 10%;
+    width: 50%;
+    border: 10px rgba(25, 25, 190, 0.719);
+    border-style: round;
+    padding: 10px;
+}
+
+#outro {
+    text-align: center;
+    font-family: 'PokemonFont2';
+    text-shadow: -1px 0 rgba(255, 196, 1, 0.87);
+    font-family: 'PokemonFont';
+    font-size: 250%;
+}
+
+#expired {
+    text-align: center;
+    font-family: 'PokemonFont2';
+    text-shadow: -1px 0 rgba(255, 196, 1, 0.87);
+    font-family: 'PokemonFont';
+    font-size: 100%;
+
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+     [class*="col-"] {
+      width: 100%;
+    }
+    .whitebox {
+        width: 140%;
+        height: 100%;
+    }
+    #outro {
+        font-size: 150%
+    }
+    #expired {
+        font-size: 50%
+    }
+
+}
