@@ -1,58 +1,118 @@
+import './pokeSel.css'
+
 import React, { Component } from 'react'
+import Sprite from './component/sprite'
 let moment = require("moment");
 
 
-const status = {
-    hunger: 0,
-    hungerT: moment().format(),
-    exhaust: 0,
-    exhaustT: moment().format(),
-    boredom: 0,
-    boredomT: moment().format(),
-    affection: 0,
-    affectionT: moment().format(),
-    anger: 0,
-    angerT: moment().format(),
-    sadness: 0,
-    sadnessT: moment().format(),
-}
 class PokeSel extends Component {
-    getPokedex() {
-        let id = Math.floor(Math.random() * 151)
-        fetch(`./pokedex/${id}`)
+    state = {
+        isReady: false,
+        randNum: null,
+        img: ''
+    }
+    tmp = {
+        user_id: '',
+        user_name: '',
+        pokemon_nickname: '',
+        hunger: '50',
+        hungerT: moment().format('YYYY-MM-DD kk:mm:ss'),
+        exhaust: '50',
+        exhaustT: moment().format('YYYY-MM-DD kk:mm:ss'),
+        boredom: '50',
+        boredomT: moment().format('YYYY-MM-DD kk:mm:ss'),
+        affection: '50',
+        affectionT: moment().format('YYYY-MM-DD kk:mm:ss'),
+        anger: '50',
+        angerT: moment().format('YYYY-MM-DD kk:mm:ss'),
+        sadness: '50',
+        sadnessT: moment().format('YYYY-MM-DD kk:mm:ss'),
+        pokemon_name: '',
+        front_img: '',
+        back_img: '',
+        type_1: '',
+        type_2: '',
+        hp: '',
+        attack: '',
+        defense: '',
+        sp_attack: '',
+        sp_defense: '',
+        speed: '',
+        background: '',
+        isBaby: '',
+        canEvolve: '',
+        createAt: moment().format('YYYY-MM-DD kk:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD kk:mm:ss'),
+    }
+    componentWillMount = () => {
+        this.setState({ randNum: Math.floor(Math.random() * 151) })
+    }
+    componentDidMount = () => {
+        this.getPokedex(this.state.randNum)
+    }
+    getPokedex(id) {
+        fetch(`/pokedex/${id}`)
             .then(r => r.json())
             .then(r => {
-                status.id = r.id
-                status.pokemon_name = r.pokemon_name
-                status.front_img = r.front_img
-                status.back_img = r.back_img
-                status.type_1 = r.type_1
-                status.type_2 = r.type_2
-                status.hp = r.hp
-                status.attack = r.attack
-                status.defense = r.defense
-                status.sp_attack = r.sp_attack
-                status.sp_defense = r.sp_defense
-                status.speed = r.speed
-                status.background = r.background
-                status.isBaby = r.isBaby
-                status.canEvolve = r.canEvolve
-
-                console.log(status)
-
+                console.log(r)
+                this.tmp.pokemon_name = r.pokemon_name
+                this.tmp.front_img = r.front_img
+                this.tmp.back_img = r.back_img
+                this.tmp.type_1 = r.type_1
+                this.tmp.type_2 = r.type_2
+                this.tmp.hp = r.hp
+                this.tmp.attack = r.attack
+                this.tmp.defense = r.defense
+                this.tmp.sp_attack = r.sp_attack
+                this.tmp.sp_defense = r.sp_defense
+                this.tmp.speed = r.speed
+                this.tmp.background = r.background
+                this.tmp.isBaby = r.isBaby
+                this.tmp.canEvolve = r.canEvolve
+                this.tmp.user_id = this.props.user_id
+                this.tmp.user_name = this.props.identifier
+                this.setState({
+                    img: r.front_img,
+                    isReady: true
+                })
+                console.log(this.state.isReady)
+                console.log(this.state.img)
             })
             .catch(e => console.log(e))
     }
-  //Post to Join Database
-
-  //
-render() {
-    return (
-        <>
-            <button onClick={() => this.getPokedex()}> Hello </button>
-        </>
-    )
-}
+    postJoinData = () => {
+        fetch('/join', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.tmp)
+        })
+            .then(_ => {
+                this.props.pokeSelected(true)
+            })
+            .catch(e => console.log(e))
+    }
+    setNickName = (name) => {
+        this.tmp.pokemon_nickname = name
+        this.postJoinData()
+    }
+    render() {
+        const { user_id, isPokeSelReady } = this.props
+        const { isReady, img } = this.state
+        return (
+            <>
+                <div className='pokeSelContainer'>
+                    {
+                        isReady ?
+                        <Sprite img={img} setNickName={this.setNickName} />
+                        :
+                        ''
+                    }
+                </div>
+            </>
+        )
+    }
 }
 
 export default PokeSel
