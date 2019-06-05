@@ -80,7 +80,6 @@ class App extends Component {
     fetch(`/join/${uid}`)
       .then(r => r.json())
       .then(r => {
-        console.log(r)
         if (r === null) {
           this.setState({
             isPokeSel: false,
@@ -99,7 +98,6 @@ class App extends Component {
             })
           }
         }
-        console.log(`ispokeSel : ${this.state.isPokeSel}`)
       })
       .catch(e => console.log(e))
   }

@@ -75,8 +75,6 @@ class PokeSel extends Component {
                     img: r.front_img,
                     isReady: true
                 })
-                console.log(this.state.isReady)
-                console.log(this.state.img)
             })
             .catch(e => console.log(e))
     }
