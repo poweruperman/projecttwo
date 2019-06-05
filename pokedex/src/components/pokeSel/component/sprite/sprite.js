@@ -5,9 +5,6 @@ class Sprite extends Component {
         const nameHere = this.name.value;
         this.props.setNickName(nameHere)
     }
-    componentDidMount = () => {
-        console.log(this.props.img)
-    }
     render() {
         const { img } = this.props
         return (
