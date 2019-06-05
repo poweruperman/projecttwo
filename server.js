@@ -8,6 +8,10 @@ app.use(express.static(join(__dirname, 'pokedex', 'build')))
 app.use(express.urlencoded({ extended : true }))
 app.use(express.json())
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/pokedex/build/index.html'))
+  })
+  
 require('./routes')(app)
 
 require('./config').sync()
