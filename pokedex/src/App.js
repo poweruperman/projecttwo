@@ -103,6 +103,13 @@ class App extends Component {
       })
       .catch(e => console.log(e))
   }
+  pokeSelected = (data) => {
+    if (data) {
+      this.setState({ isPokeSel : true })
+    } else {
+      this.setState({ isPokeSel : false})
+    }
+  }
   render() {
     const { isSignedIn, isPokeSel, user_id, isPokeSelReady } = this.state
     return (
@@ -113,7 +120,7 @@ class App extends Component {
               if (isSignedIn === true && isPokeSel === true)
                 return <Display user_id={user_id} />
               if (isSignedIn === true && isPokeSel === false)
-                return <PokeSel user_id={user_id} isPokeSelReady={isPokeSelReady} />
+                return <PokeSel user_id={user_id} isPokeSelReady={isPokeSelReady} pokeSelected={this.pokeSelected} />
               else
                 return <Login uiConfig={uiConfig} />
             }} />
