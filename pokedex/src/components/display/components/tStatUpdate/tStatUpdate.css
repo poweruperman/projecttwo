@@ -6,28 +6,46 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    color: yellow;
+    text-shadow: #2542e2 2px 1px 1px;
 }
 .affection {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
+    margin: auto;
+    font-weight:bold; 
 }
 .anger {
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
+    margin: auto;
+    font-weight:bold; 
+
 }
 .boredom {
     grid-column: 3 / span 1;
     grid-row: 1 / span 1;
+    margin: auto;
+    font-weight:bold; 
+
 }
 .exhaust {
     grid-column: 1 / span 1;
     grid-row: 2 / span 1;
+    margin: auto;
+    font-weight:bold; 
+
 }
 .hunger {
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
+    margin: auto;
+    font-weight:bold; 
+
 }
 .sadness {
     grid-column: 3 / span 1;
     grid-row: 2 / span 1;
+    margin: auto;
+    font-weight:bold; 
 }

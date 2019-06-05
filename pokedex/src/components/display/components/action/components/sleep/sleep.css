@@ -13,6 +13,8 @@
 #sleepInput {
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
+
+    border: 2px solid black;
 }
 #sleepBtn {
     grid-column: 3 / span 1;
