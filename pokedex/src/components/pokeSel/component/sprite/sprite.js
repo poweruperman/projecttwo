@@ -1,3 +1,5 @@
+import './sprite.css'
+
 import React, { Component } from 'react'
 
 class Sprite extends Component {
@@ -9,9 +11,9 @@ class Sprite extends Component {
         const { img } = this.props
         return (
             <>
-                <img src={img} alt="your Pokemon" />
-                <label htmlFor='nickName' className='submitForm'>Enter a nickname for your pokemon</label>
-                <input type="text" ref={input => this.name = input} />
+                <img src={img} id="poke" alt="your Pokemon" />
+                <label htmlFor='nickName' className='submitForm'>Enter a nickname for your Pokemon:</label>
+                <input type="text" id="pokeButton" ref={input => this.name = input} />
                 <button onClick={this.handleSubmitClick}>Submit</button>
             </>
         )
