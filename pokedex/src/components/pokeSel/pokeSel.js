@@ -103,9 +103,11 @@ class PokeSel extends Component {
                 <div className='pokeSelContainer'>
                     {
                         isReady ?
-                        <Sprite img={img} setNickName={this.setNickName} />
-                        :
-                        ''
+                            <div className='poke'>
+                                <div className="yourPokemon"><Sprite img={img} setNickName={this.setNickName} /></div>
+                            </div>
+                            :
+                            ''
                     }
                 </div>
             </>

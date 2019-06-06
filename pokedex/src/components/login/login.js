@@ -26,7 +26,7 @@ class Login extends Component {
           best <br></br> of both worlds of raising your very own Pokemon! Feed it,
           play with it, love <br></br>and care for
           your very own Pokegatchi!<br></br>
-              <iframe src="https://giphy.com/embed/JgCZ2hksM1abS" title ="pokemonFrame" width="150" height="150" frameBorder="0" alignt="right" id="pokeball"></iframe><a href="https://giphy.com/stickers/pokeball-JgCZ2hksM1abS"></a>
+          <iframe src="https://giphy.com/embed/JgCZ2hksM1abS" title ="pokemonFrame" width="65" height="150" frameBorder="0" alignt="right" id="pokeball"></iframe><a href="https://giphy.com/stickers/pokeball-JgCZ2hksM1abS"></a>
             </p>
             {/* <iframe src="https://giphy.com/embed/JgCZ2hksM1abS" width="250" height="250" frameBorder="0" alignt="right" id="pokeball"></iframe><a href="https://giphy.com/stickers/pokeball-JgCZ2hksM1abS"></a> */}
           </Card>
