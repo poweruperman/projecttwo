@@ -1,40 +1,54 @@
-* {
+c* {
     box-sizing: border-box;
 }
-
+.spriteImg{
+    height: 150px;
+}
 .displayContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2fr 4fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: .5fr .5fr 1fr .25fr;
     width: 100vw;
     height: 100vh;
 }
+
 .backgroundImg {
-    grid-column: 1 / span 2;
-    grid-row: 1 / span 3;
+    grid-column: 1 / span 4;
+    grid-row: 1 / span 4;
     z-index: -1;
     width: 100vw;
     height: 100vh;
     object-fit: cover;
 }
 
-.pokemonSprite {
-    grid-column: 1 / span 1;
+.TStatUpdate {
+    grid-column: 1 / span 4;
     grid-row: 1 / span 1;
-    align-content: center;
+    color: white;
 }
 
 .prompt {
-    grid-column: 2 / span 1;
+    grid-column: 2 / span 2;
     grid-row: 2 / span 1;
     align-content: center;
+    text-align: center;
+    font-size: 16px;
+    color: yellow;
+    text-shadow: #2542e2 2px 1px 1px;    
+    font-weight: bold;
+  
 }
 
-.TStatUpdate {
-    grid-column: 2 / span 1;
-    grid-row: 1 / span 1;
-}
-.Action {
-    grid-column: 1 / span 2;
+.pokemonSprite {
+    grid-column: 2 / span 2;
     grid-row: 3 / span 1;
+    align-self: end;
+    justify-self: center;
+}
+
+.Action {
+    grid-column: 1 / span 4;
+    grid-row: 4 / span 1;
+    align-self: end;
+    background: white;
 }
