@@ -12,13 +12,13 @@ import PokeSel from './components/pokeSel'
 **********************************************/
 // Configure Firebase.
 const config = {
-  apiKey: "AIzaSyBsl51x6ee4Fw3vAVxaV-bMWjXfjC0DjkQ",
-  authDomain: "pokemontamagotchi-cba50.firebaseapp.com",
-  databaseURL: "https://pokemontamagotchi-cba50.firebaseio.com",
-  projectId: "pokemontamagotchi-cba50",
-  storageBucket: "pokemontamagotchi-cba50.appspot.com",
-  messagingSenderId: "61180746516",
-  appId: "1:61180746516:web:65b3146710e92417"
+  apiKey: "AIzaSyAIWFiv_P3GGtDJBD2MaC3R0jmxk0-xuW4",
+  authDomain: "pokemontamagotchi.firebaseapp.com",
+  databaseURL: "https://pokemontamagotchi.firebaseio.com",
+  projectId: "pokemontamagotchi",
+  storageBucket: "pokemontamagotchi.appspot.com",
+  messagingSenderId: "439178602865",
+  appId: "1:439178602865:web:5614d099bfddb5b8"
   // ...
 };
 firebase.initializeApp(config);
