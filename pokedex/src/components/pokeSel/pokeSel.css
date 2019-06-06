@@ -1,0 +1,46 @@
+body {
+    background-image: url('http://paperlief.com/images/pixel-pokemon-gif-wallpaper-4.jpg');
+    background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	height: 100vh;
+	background-position: center center;
+	position: relative;
+    
+
+}
+
+.pokeSelContainer {
+    text-align: center;
+    font-size: 160%;
+    margin-top: 75px;
+    font-family: 'Permanent Marker', cursive;
+}
+
+
+
+#pokeButton {
+    border-radius: 20px;;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    margin-left: 5px;
+} 
+
+.yourPokemon {
+    margin-bottom: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    align-content: center;
+}
+
+
+.poke {
+    margin-bottom: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    align-content: center;
+
+}
+
