@@ -24,9 +24,7 @@ class Sprite extends Component {
         const { img } = this.props
         return (
             <>
-                <div>
                 <img src={img} id="poke" alt="your Pokemon" />
-                </div>
                 <label htmlFor='nickName' className='submitForm'>Enter a nickname for your Pokemon:</label>
                 <input type="text" id="pokeButton" ref={input => this.name = input} />
                 <button onClick={this.handleSubmitClick}>Submit</button>
