@@ -16,7 +16,6 @@
     "reactstrap": "^8.0.0",
     "sequelize": "^5.8.6"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node server.js",
     "heroku-postbuild": "cd pokedex && npm install && npm run build"

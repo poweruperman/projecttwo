@@ -6,6 +6,7 @@ import firebase from 'firebase'
 import Login from './components/login'
 import Display from './components/display'
 import PokeSel from './components/pokeSel'
+import Delete from './components/delete'
 
 /**********************************************
 *  *** FIREBASE LOGIN FOR GLOBAL SCOPE ***   *
@@ -122,6 +123,7 @@ class App extends Component {
               else
                 return <Login uiConfig={uiConfig} />
             }} />
+            <Route exact path='/delete' component={() => <Delete user_id={user_id} />} />
           </div>
         </Router>
       </>
